@@ -1,0 +1,79 @@
+{
+  "name": "vocabulary-api",
+  "version": "1.0.0",
+  "description": "Backend for my own vocabulary training app, based on MongoDB and GraphQL",
+  "main": "src/index.js",
+  "scripts": {
+    "start": "nodemon",
+    "start:win": "start http://localhost:4001 && nodemon",
+    "start:mac": "open http://localhost:4001 && nodemon",
+    "test": "jest --passWithNoTests",
+    "test:watch": "jest --watch --passWithNoTests",
+    "test:coverage": "jest --coverage"
+  },
+  "keywords": [
+    "vocabulary",
+    "learning",
+    "api",
+    "graphql",
+    "mongodb"
+  ],
+  "author": "Alexander Urban <lexa79@protonmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "apollo-server": "^2.19.2",
+    "graphql": "^15.5.0",
+    "graphql-type-uuid": "^0.2.0"
+  },
+  "devDependencies": {
+    "@types/jest": "^26.0.20",
+    "eslint": "^7.19.0",
+    "eslint-config-airbnb-base": "^14.2.1",
+    "eslint-config-prettier": "^7.2.0",
+    "eslint-plugin-import": "^2.22.1",
+    "eslint-plugin-jest": "^24.1.3",
+    "jest": "^26.6.3",
+    "jest-extended": "^0.11.5",
+    "nock": "^13.0.7",
+    "nodemon": "^2.0.7",
+    "prettier": "^2.2.1"
+  },
+  "nodemonConfig": {
+    "ext": "js,json,graphql"
+  },
+  "eslintConfig": {
+    "env": {
+      "node": true,
+      "jest": true
+    },
+    "extends": [
+      "airbnb-base",
+      "prettier"
+    ],
+    "plugins": [
+      "jest"
+    ],
+    "rules": {
+      "no-use-before-define": [
+        "error",
+        "nofunc"
+      ],
+      "no-underscore-dangle": "off"
+    }
+  },
+  "prettier": {
+    "singleQuote": true,
+    "trailingComma": "es5",
+    "useTabs": false,
+    "printWidth": 100,
+    "arrowParens": "avoid"
+  },
+  "jest": {
+    "clearMocks": true,
+    "setupFilesAfterEnv": [
+      "jest-extended"
+    ],
+    "verbose": true,
+    "testEnvironment": "node"
+  }
+}
