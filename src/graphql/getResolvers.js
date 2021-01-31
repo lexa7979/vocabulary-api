@@ -1,6 +1,16 @@
 const GraphQLUUID = require('graphql-type-uuid');
 
-const { getWordClasses: wordClasses } = require('./test-data');
+const {
+  listWordClasses,
+  listWords,
+  listFlectionsOfWordClass,
+  listTranslationsOfWord,
+
+  getWordById,
+  getClassOfWord,
+  // getWordOfTranslation,
+  // getFlectionOfTranslation,
+} = require('./test-data');
 
 module.exports = getResolvers;
 
@@ -9,8 +19,23 @@ function getResolvers() {
     UUID: GraphQLUUID,
 
     Query: {
-      wordClasses,
+      wordClasses: listWordClasses,
+      word: getWordById,
+      words: listWords,
     },
+
+    WordClass: {
+      flections: listFlectionsOfWordClass,
+    },
+
+    Word: {
+      class: getClassOfWord,
+      translations: listTranslationsOfWord,
+    },
+
+    // Translation: {
+    //   flection: getFlectionOfTranslation,
+    // },
   };
 
   return resolvers;
