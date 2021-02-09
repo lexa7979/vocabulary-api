@@ -8,8 +8,9 @@ function getTypedefs() {
 
     type Query {
       wordClasses(first: Int = 0, offset: Int = 0): [WordClass!]!
-      words(first: Int = 0, offset: Int = 0): [Word!]!
       word(id: UUID): Word
+      words(first: Int = 0, offset: Int = 0): [Word!]!
+      users(first: Int = 0, offset: Int = 0): [User!]!
     }
 
     type WordClass {
@@ -19,22 +20,31 @@ function getTypedefs() {
     }
 
     type Flection {
+      id: UUID!
       wordClass: WordClass!
-      flectionKey: String!
       name_de: String
+      pos: Int
     }
 
     type Word {
       id: UUID!
-      class: WordClass
+      wordClass: WordClass
       translations(first: Int = 0, offset: Int = 0): [Translation!]!
     }
 
     type Translation {
-      word: Word!
-      flection: Flection!
+      id: UUID!
+      flection: Flection
       text_de: String!
       text_sv: String!
+      word: Word!
+    }
+
+    type User {
+      id: UUID!
+      login: String!
+      name: String
+      activeWords(first: Int = 0, offset: Int = 0): [Word!]!
     }
   `;
 
