@@ -7,36 +7,44 @@ function getTypedefs() {
     scalar UUID
 
     type Query {
+      wordClass(id: UUID): WordClass
       wordClasses(first: Int = 0, offset: Int = 0): [WordClass!]!
+
       word(id: UUID): Word
       words(first: Int = 0, offset: Int = 0): [Word!]!
+
+      user(id: UUID): User
       users(first: Int = 0, offset: Int = 0): [User!]!
     }
 
     type WordClass {
       id: UUID!
       name_de: String
+
       flections(first: Int = 0, offset: Int = 0): [Flection!]!
     }
 
     type Flection {
       id: UUID!
-      wordClass: WordClass!
       name_de: String
       pos: Int
+
+      wordClass: WordClass!
     }
 
     type Word {
       id: UUID!
+
       wordClass: WordClass
       translations(first: Int = 0, offset: Int = 0): [Translation!]!
     }
 
     type Translation {
       id: UUID!
-      flection: Flection
       text_de: String!
       text_sv: String!
+
+      flection: Flection
       word: Word!
     }
 
@@ -44,6 +52,7 @@ function getTypedefs() {
       id: UUID!
       login: String!
       name: String
+
       activeWords(first: Int = 0, offset: Int = 0): [Word!]!
     }
   `;

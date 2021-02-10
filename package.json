@@ -9,6 +9,7 @@
     "start:mac": "open http://localhost:4001 && nodemon",
     "test": "jest --passWithNoTests",
     "test:watch": "jest --watch --passWithNoTests",
+    "test:watch-update": "jest --watch -u",
     "test:coverage": "jest --coverage"
   },
   "keywords": [
