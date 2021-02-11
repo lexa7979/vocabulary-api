@@ -1,7 +1,7 @@
 const db = require('../../dummy-db');
 const getTestId = require('../../dummy-db/getTestId');
 
-const { _testInternals } = require('./WordClass');
+const { resolvers } = require('./WordClass');
 
 const { bold, RESOLVES, ASYNC } = require('../../../test');
 
@@ -9,7 +9,7 @@ const context = { db };
 const info = null;
 
 describe(`has an ${ASYNC} function ${bold('Query.wordClasses()')} that`, () => {
-  const { wordClasses } = _testInternals.resolvers.Query;
+  const { wordClasses } = resolvers.Query;
 
   it(`- when used with a valid ID - ${RESOLVES} as expected`, async () => {
     const parent = null;

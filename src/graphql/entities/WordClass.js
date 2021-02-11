@@ -1,13 +1,8 @@
-// const { gql, makeExecutableSchema } = require('apollo-server');
 const { gql } = require('apollo-server');
 
 module.exports = {
   typeDefs: getTypeDefs(),
   resolvers: getResolvers(),
-  // schema: makeExecutableSchema({ typeDefs: getTypeDefs(), resolvers: getResolvers() }),
-  _testInternals: {
-    resolvers: getResolvers(),
-  },
 };
 
 function getTypeDefs() {
