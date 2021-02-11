@@ -11,33 +11,19 @@ const allUsers = [
     login: 'user1',
     name: 'User 1',
     currStep: 8,
-    // activeWords: [
-    //   {
-    //     wordId: getTestId('word1'),
-    //     currNumber: 10,
-    //     currFlection: getTestId('verb-flection3'),
-    //     statisticByFlection: {
-    //       [getTestId('verb-flection1')]: { lastRunNumber: null, success: 0, failure: 0 },
-    //       [getTestId('verb-flection2')]: { lastRunNumber: null, success: 0, failure: 0 },
-    //       [getTestId('verb-flection3')]: { lastRunNumber: null, success: 0, failure: 0 },
-    //       [getTestId('verb-flection4')]: { lastRunNumber: null, success: 0, failure: 0 },
-    //       [getTestId('verb-flection5')]: { lastRunNumber: null, success: 0, failure: 0 },
-    //     },
-    //   },
-    //   {
-    //     wordId: getTestId('word3'),
-    //     currNumber: 9,
-    //     currFlection: getTestId('adjective-flection3'),
-    //     statisticByFlection: {
-    //       [getTestId('adjective-flection1')]: { lastRunNumber: null, success: 0, failure: 0 },
-    //       [getTestId('adjective-flection2')]: { lastRunNumber: null, success: 0, failure: 0 },
-    //       [getTestId('adjective-flection3')]: { lastRunNumber: null, success: 0, failure: 0 },
-    //       [getTestId('adjective-flection4')]: { lastRunNumber: null, success: 0, failure: 0 },
-    //       [getTestId('adjective-flection5')]: { lastRunNumber: null, success: 0, failure: 0 },
-    //       [getTestId('adjective-flection6')]: { lastRunNumber: null, success: 0, failure: 0 },
-    //     },
-    //   },
-    // ],
+    learnPath: [
+      {
+        step: 7,
+        wordId: getTestId('word3'),
+        flection: getTestId('adjective-flection2'),
+        result: 100,
+      },
+      {
+        step: 8,
+        wordId: getTestId('word1'),
+        flection: getTestId('verb-flection4'),
+      },
+    ],
   },
   {
     id: getTestId('user2'),
