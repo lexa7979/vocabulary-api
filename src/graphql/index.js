@@ -1,7 +1,7 @@
-const { ApolloServer } = require('apollo-server');
+const { ApolloServer, mergeSchemas } = require('apollo-server');
 
-const getTypedefs = require('./getTypedefs');
-const getResolvers = require('./getResolvers');
+const { allTypeDefs, allResolvers } = require('./entities');
+
 const DataService = require('../data');
 
 module.exports = {
@@ -9,11 +9,14 @@ module.exports = {
 };
 
 async function init() {
-  const typeDefs = getTypedefs();
-  const resolvers = getResolvers();
+  const schema = mergeSchemas({
+    schemas: Object.values(allTypeDefs),
+    resolvers: Object.values(allResolvers),
+  });
+
   const context = { db: DataService };
 
-  const server = new ApolloServer({ typeDefs, resolvers, context });
+  const server = new ApolloServer({ schema, context });
 
   const { url } = await server.listen({ port: 4001 });
 
