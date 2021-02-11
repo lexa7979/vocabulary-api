@@ -1,9 +1,32 @@
-const getTestId = require('./getTestId');
+const getTestId = require('../getTestId');
 
-module.exports = {
-  getActiveWord,
-  listAllActiveWordsOfUser,
-};
+const allUsers = [
+  {
+    id: getTestId('user1'),
+    login: 'user1',
+    name: 'User 1',
+    currStep: 8,
+    learnPath: [
+      {
+        step: 7,
+        wordId: getTestId('word3'),
+        flection: getTestId('adjective-flection2'),
+        result: 100,
+      },
+      {
+        step: 8,
+        wordId: getTestId('word1'),
+        flection: getTestId('verb-flection4'),
+      },
+    ],
+  },
+  {
+    id: getTestId('user2'),
+    login: 'user2',
+    name: 'User 2',
+    currStep: 0,
+  },
+];
 
 const allActiveWords = [
   {
@@ -110,19 +133,7 @@ const allActiveWords = [
   },
 ];
 
-async function getActiveWord(id) {
-  const activeWord = allActiveWords.filter(item => item.id === id)[0];
-  if (activeWord == null) {
-    throw new Error(`getActiveWord() failed - invalid ID (${id})`);
-  }
-  return activeWord;
-}
-
-async function listAllActiveWordsOfUser(userId, first, offset) {
-  const list = allActiveWords
-    .filter(item => item.userId === userId)
-    .slice(offset, first ? offset + first : undefined);
-
-  const results = list.map(activeWord => ({ ...activeWord }));
-  return results;
-}
+module.exports = {
+  allUsers,
+  allActiveWords,
+};

@@ -2,7 +2,7 @@ const { ApolloServer, mergeSchemas } = require('apollo-server');
 
 const { allTypeDefs, allResolvers } = require('./entities');
 
-const DataService = require('../data');
+const DataService = require('../dummy-db');
 
 module.exports = {
   init,

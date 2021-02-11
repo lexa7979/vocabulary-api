@@ -1,11 +1,11 @@
-const getTestId = require('./getTestId');
-const Translations = require('./translations');
+const getTestId = require('../getTestId');
+const Words = require('./words');
 
-const { IS_ACCESSIBLE, EXPECTS, RESOLVES, REJECTS } = require('../../test');
+const { IS_ACCESSIBLE, EXPECTS, RESOLVES, REJECTS } = require('../../../test');
 
-describe('Test-data service "translations"', () => {
+describe('Test-data service "words"', () => {
   describe('has an async function getTranslation() which', () => {
-    const { getTranslation } = Translations;
+    const { getTranslation } = Words;
 
     it(IS_ACCESSIBLE, () => expect(getTranslation).toBeFunction());
 
@@ -30,7 +30,7 @@ describe('Test-data service "translations"', () => {
   });
 
   describe('has an async function listAllTranslationsOfWord() which', () => {
-    const { listAllTranslationsOfWord } = Translations;
+    const { listAllTranslationsOfWord } = Words;
 
     it(IS_ACCESSIBLE, () => expect(listAllTranslationsOfWord).toBeFunction());
 

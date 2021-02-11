@@ -1,8 +1,8 @@
-const getTestId = require('./getTestId');
+const getTestId = require('../getTestId');
 
 const WordClasses = require('./wordClasses');
 
-const { bold, green, RESOLVES, REJECTS, IS_ACCESSIBLE, EXPECTS } = require('../../test');
+const { bold, green, RESOLVES, REJECTS, IS_ACCESSIBLE, EXPECTS } = require('../../../test');
 
 describe('Test-data service "WordClasses"', () => {
   runTestsAboutGetWordClass();

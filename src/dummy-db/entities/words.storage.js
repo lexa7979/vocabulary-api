@@ -1,9 +1,19 @@
-const getTestId = require('./getTestId');
+const getTestId = require('../getTestId');
 
-module.exports = {
-  getTranslation,
-  listAllTranslationsOfWord,
-};
+const allWords = [
+  {
+    id: getTestId('word1'),
+    classId: getTestId('verb'),
+  },
+  {
+    id: getTestId('word2'),
+    classId: getTestId('noun'),
+  },
+  {
+    id: getTestId('word3'),
+    classId: getTestId('adjective'),
+  },
+];
 
 const allTranslations = [
   {
@@ -141,17 +151,7 @@ const allTranslations = [
   },
 ];
 
-async function getTranslation(id) {
-  const translation = allTranslations.filter(item => item.id === id)[0];
-  if (translation == null) {
-    throw new Error(`getTranslation() failed - invalid ID (${id})`);
-  }
-  return { ...translation };
-}
-
-async function listAllTranslationsOfWord(wordId, first = 0, offset = 0) {
-  const list = allTranslations.filter(item => item.wordId === wordId);
-
-  const results = list.slice(offset, first ? offset + first : undefined);
-  return results;
-}
+module.exports = {
+  allWords,
+  allTranslations,
+};

@@ -1,9 +1,19 @@
-const getTestId = require('./getTestId');
+const getTestId = require('../getTestId');
 
-module.exports = {
-  getFlection,
-  listAllFlectionsOfWordClass,
-};
+const allWordClasses = [
+  {
+    id: getTestId('verb'),
+    name_de: 'Verb',
+  },
+  {
+    id: getTestId('noun'),
+    name_de: 'Substantiv',
+  },
+  {
+    id: getTestId('adjective'),
+    name_de: 'Adjektiv',
+  },
+];
 
 const allFlections = [
   {
@@ -98,19 +108,7 @@ const allFlections = [
   },
 ];
 
-async function getFlection(id) {
-  const flection = allFlections.filter(item => item.id === id)[0];
-  if (flection == null) {
-    throw new Error(`getFlection() failed - invalid ID (${id})`);
-  }
-  return { ...flection };
-}
-
-async function listAllFlectionsOfWordClass(classId, first = 0, offset = 0) {
-  const list = allFlections
-    .filter(item => item.classId === classId)
-    .sort((itemA, itemB) => itemA.pos - itemB.pos);
-
-  const results = list.slice(offset, first ? offset + first : undefined);
-  return results;
-}
+module.exports = {
+  allWordClasses,
+  allFlections,
+};
