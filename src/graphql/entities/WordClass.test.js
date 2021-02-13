@@ -1,5 +1,5 @@
 const db = require('../../dummy-db');
-const getTestId = require('../../dummy-db/getTestId');
+const { getTestId } = require('../../dummy-db/testIds');
 
 const { resolvers } = require('./WordClass');
 
