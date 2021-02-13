@@ -1,30 +1,28 @@
-const getTestId = require('../getTestId');
+const { getTestId } = require('../testIds');
 
 const allWords = [
-  {
-    id: getTestId('word1'),
-    classId: getTestId('verb'),
-  },
-  {
-    id: getTestId('word2'),
-    classId: getTestId('noun'),
-  },
-  {
-    id: getTestId('word3'),
-    classId: getTestId('adjective'),
-  },
+  { id: getTestId('word1'), classId: getTestId('verb') },
+  { id: getTestId('word2'), classId: getTestId('noun') },
+  { id: getTestId('word3'), classId: getTestId('adjective') },
+  { id: getTestId('word4'), classId: getTestId('noun') },
+  { id: getTestId('word5'), classId: getTestId('noun') },
+  { id: getTestId('word6'), classId: getTestId('noun') },
+  { id: getTestId('word7'), classId: getTestId('noun') },
+  { id: getTestId('word8'), classId: getTestId('noun') },
+  { id: getTestId('word9'), classId: getTestId('noun') },
+  { id: getTestId('word10'), classId: getTestId('noun') },
+  { id: getTestId('word11'), classId: getTestId('noun') },
+  { id: getTestId('word12'), classId: getTestId('noun') },
 ];
 
 const _getTranslationItems = (wordIdKey, ...listOfFlectionIdKeyWithTextTuple) => {
   const wordId = getTestId(wordIdKey);
   // eslint-disable-next-line camelcase
-  return listOfFlectionIdKeyWithTextTuple.map(([flectionIdKey, text_de, text_sv], index) => ({
-    id: getTestId(`${wordIdKey}-translation${index + 1}`),
-    wordId,
-    flectionId: getTestId(flectionIdKey),
-    text_de,
-    text_sv,
-  }));
+  return listOfFlectionIdKeyWithTextTuple.map(([flectionIdKey, text_de, text_sv], index) => {
+    const id = getTestId(`${wordIdKey}-translation${index + 1}`);
+    const flectionId = getTestId(flectionIdKey);
+    return { id, wordId, flectionId, text_de, text_sv };
+  });
 };
 
 const allTranslations = [
@@ -32,7 +30,7 @@ const allTranslations = [
     'word1',
     ['verb-flection1', 'gehen', 'gå'],
     ['verb-flection2', 'er geht', 'han går'],
-    ['verb-flection2', 'sie geht', 'hun går'],
+    ['verb-flection2', 'sie geht', 'hon går'],
     ['verb-flection2', 'wir gehen', 'vi går'],
     ['verb-flection3', 'er ging', 'han gick'],
     ['verb-flection4', 'er ist gegangen', 'han har gått'],
@@ -55,6 +53,51 @@ const allTranslations = [
     ['adjective-flection4', 'die alten Autos', 'de gamla bilarna'],
     ['adjective-flection5', 'älter', 'äldre'],
     ['adjective-flection6', 'am ältesten', 'äldst']
+  ),
+  ..._getTranslationItems(
+    'word4',
+    ['noun-flection1', 'ein Vogel', 'en fågel'],
+    ['noun-flection2', 'der Vogel', 'fågeln']
+  ),
+  ..._getTranslationItems(
+    'word5',
+    ['noun-flection1', 'ein Elch', 'en älg'],
+    ['noun-flection2', 'der Elch', 'älgen']
+  ),
+  ..._getTranslationItems(
+    'word6',
+    ['noun-flection1', 'ein Rentier', 'en ren'],
+    ['noun-flection2', 'das Rentier', 'renen']
+  ),
+  ..._getTranslationItems(
+    'word7',
+    ['noun-flection1', 'ein Fenster', 'ett fönster'],
+    ['noun-flection2', 'das Fenster', 'fönstret']
+  ),
+  ..._getTranslationItems(
+    'word8',
+    ['noun-flection1', 'ein Kühlschrank', 'ett kylskåp'],
+    ['noun-flection2', 'der Kühlschrank', 'kylskåpet']
+  ),
+  ..._getTranslationItems(
+    'word9',
+    ['noun-flection1', 'eine Website', 'en webbsajt'],
+    ['noun-flection2', 'die Website', 'webbsajten']
+  ),
+  ..._getTranslationItems(
+    'word10',
+    ['noun-flection1', 'eine Decke', 'ett täcke'],
+    ['noun-flection2', 'die Decke', 'täcket']
+  ),
+  ..._getTranslationItems(
+    'word11',
+    ['noun-flection1', 'eine Krankenschwester', 'en sjuksjöterska'],
+    ['noun-flection2', 'die Krankenschwester', 'sjuksköterskan']
+  ),
+  ..._getTranslationItems(
+    'word12',
+    ['noun-flection1', 'ein Schild', 'en skylt'],
+    ['noun-flection2', 'das Schild', 'skylten']
   ),
 ];
 

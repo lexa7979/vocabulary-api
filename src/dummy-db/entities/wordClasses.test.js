@@ -1,4 +1,4 @@
-const getTestId = require('../getTestId');
+const { getTestId } = require('../testIds');
 
 const WordClasses = require('./wordClasses');
 

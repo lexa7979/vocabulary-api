@@ -31,7 +31,7 @@ async function getActiveWord(id) {
   return activeWord;
 }
 
-async function listAllActiveWordsOfUser(userId, first, offset) {
+async function listAllActiveWordsOfUser(userId, first = 0, offset = 0) {
   const list = allActiveWords
     .filter(item => item.userId === userId)
     .slice(offset, first ? offset + first : undefined);
