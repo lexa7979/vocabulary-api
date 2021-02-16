@@ -7,8 +7,20 @@ const { ASYNC, bold, EXPECTS, IS_ACCESSIBLE, REJECTS, RESOLVES } = require('../.
 const Global = {};
 
 describe(`Test-data service "users"`, () => {
+  it(`has the expected exports`, () => {
+    expect(Users).toMatchInlineSnapshot(`
+      Object {
+        "getActiveWord": [Function],
+        "getUser": [Function],
+        "listAllActiveWordsOfUser": [Function],
+        "listAllUsers": [Function],
+      }
+    `);
+  });
+
   runTestsAboutGetUser();
   runTestsAboutListAllUsers();
+
   runTestsAboutGetActiveWord();
   runTestsAboutListAllActiveWordsOfUser();
 });
@@ -19,16 +31,16 @@ function runTestsAboutGetUser() {
 
     it(IS_ACCESSIBLE, () => expect(getUser).toBeFunction());
 
-    it(`${EXPECTS} one argument (id)`, () => expect(getUser).toHaveLength(1));
+    it(`${EXPECTS} one argument (userId)`, () => expect(getUser).toHaveLength(1));
 
-    it(`- when used with valid user-ID - ${RESOLVES} as expected ${_nextSnapshotHint()}`, async () => {
+    it(`- when used with valid ID - ${RESOLVES} as expected ${_nextSnapshotHint()}`, async () => {
       const result = await getUser(getTestId('user1'));
 
-      const copy = TestIdHelpers.copyObjectButRemoveUUIDs(result);
+      const copy = TestIdHelpers.copyObjectButReplaceUUIDs(result);
       expect(copy).toMatchSnapshot(`> user1 <`);
     });
 
-    it(`- when used with an invalid user-ID - ${REJECTS} as expected`, async () => {
+    it(`- when used with invalid ID - ${REJECTS} as expected`, async () => {
       await expect(() => getUser(getTestId('invalid'))).rejects.toThrow('invalid ID');
     });
   });
@@ -45,15 +57,15 @@ function runTestsAboutListAllUsers() {
     it(`- when used w/o arguments - ${RESOLVES} as expected ${_nextSnapshotHint()}`, async () => {
       const result = await listAllUsers();
 
-      const copy = TestIdHelpers.copyObjectButRemoveUUIDs(result);
+      const copy = TestIdHelpers.copyObjectButReplaceUUIDs(result);
       expect(copy).toMatchSnapshot(`> all users <`);
     });
 
     it(`- when used with argument "first" - ${RESOLVES} as expected`, async () => {
       const result = await listAllUsers(1, undefined);
 
-      const copy = TestIdHelpers.copyObjectButRemoveUUIDs(result).map(item => item.id);
-      expect(copy).toMatchInlineSnapshot(`
+      const copy = TestIdHelpers.copyObjectButReplaceUUIDs(result);
+      expect(copy.map(({ id }) => id)).toMatchInlineSnapshot(`
         Array [
           "(ID:user1)",
         ]
@@ -63,8 +75,8 @@ function runTestsAboutListAllUsers() {
     it(`- when used with argument "offset" - ${RESOLVES} as expected`, async () => {
       const result = await listAllUsers(undefined, 1);
 
-      const copy = TestIdHelpers.copyObjectButRemoveUUIDs(result).map(item => item.id);
-      expect(copy).toMatchInlineSnapshot(`
+      const copy = TestIdHelpers.copyObjectButReplaceUUIDs(result);
+      expect(copy.map(({ id }) => id)).toMatchInlineSnapshot(`
         Array [
           "(ID:user2)",
         ]
@@ -84,8 +96,8 @@ function runTestsAboutGetActiveWord() {
     it(`- when used with valid ID - ${RESOLVES} as expected ${_nextSnapshotHint()}`, async () => {
       const result = await getActiveWord(getTestId('user1-activeWord1'));
 
-      const copy = TestIdHelpers.copyObjectButRemoveUUIDs(result);
-      expect(copy).toMatchSnapshot(`> user1-activeWord1 <`);
+      const copy = TestIdHelpers.copyObjectButReplaceUUIDs(result);
+      expect(copy).toMatchSnapshot(`> 1st activeWord of user1 <`);
     });
 
     it(`- when used with invalid ID - ${REJECTS} as expected`, async () => {
@@ -109,33 +121,33 @@ function runTestsAboutListAllActiveWordsOfUser() {
       expect(result).toEqual([]);
     });
 
-    it(`- when used with valid user-ID - ${RESOLVES} as expected ${_nextSnapshotHint()}`, async () => {
+    it(`- when used with valid ID - ${RESOLVES} as expected ${_nextSnapshotHint()}`, async () => {
       const result1 = await listAllActiveWordsOfUser(getTestId('user1'));
       expect(result1).toBeArrayOfSize(2);
 
+      const copy = TestIdHelpers.copyObjectButReplaceUUIDs(result1);
+      expect(copy).toMatchSnapshot(`> all active-words of user1 <`);
+
       const result2 = await listAllActiveWordsOfUser(getTestId('user2'));
       expect(result2).toBeArrayOfSize(0);
-
-      const copy = TestIdHelpers.copyObjectButRemoveUUIDs(result1);
-      expect(copy).toMatchSnapshot(`> all active-words of user1 <`);
     });
 
-    it(`- when used with valid user-ID and argument "first" - ${RESOLVES} as expected`, async () => {
+    it(`- when used with valid ID and argument "first" - ${RESOLVES} as expected`, async () => {
       const result = await listAllActiveWordsOfUser(getTestId('user1'), 1, undefined);
 
-      const copy = TestIdHelpers.copyObjectButRemoveUUIDs(result).map(item => item.id);
-      expect(copy).toMatchInlineSnapshot(`
+      const copy = TestIdHelpers.copyObjectButReplaceUUIDs(result);
+      expect(copy.map(({ id }) => id)).toMatchInlineSnapshot(`
         Array [
           "(ID:user1-activeWord1)",
         ]
       `);
     });
 
-    it(`- when used with valid user-ID and argument "offset" - ${RESOLVES} as expected`, async () => {
+    it(`- when used with valid ID and argument "offset" - ${RESOLVES} as expected`, async () => {
       const result = await listAllActiveWordsOfUser(getTestId('user1'), undefined, 1);
 
-      const copy = TestIdHelpers.copyObjectButRemoveUUIDs(result).map(item => item.id);
-      expect(copy).toMatchInlineSnapshot(`
+      const copy = TestIdHelpers.copyObjectButReplaceUUIDs(result);
+      expect(copy.map(({ id }) => id)).toMatchInlineSnapshot(`
         Array [
           "(ID:user1-activeWord2)",
         ]

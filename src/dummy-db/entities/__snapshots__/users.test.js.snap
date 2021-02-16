@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Test-data service "users" (1) has an [1;37masync[0m function [1;37mgetUser()[0m which - when used with valid user-ID - [0;32mresolves[0m as expected [-> check snapshot 1]: > user1 < 1`] = `
+exports[`Test-data service "users" (1) has an [1;37masync[0m function [1;37mgetUser()[0m which - when used with valid ID - [0;32mresolves[0m as expected [-> check snapshot 1]: > user1 < 1`] = `
 Object {
   "currStep": 8,
   "id": "(ID:user1)",
@@ -54,7 +54,7 @@ Array [
 ]
 `;
 
-exports[`Test-data service "users" (3) has an [1;37masync[0m function [1;37mgetActiveWord()[0m which - when used with valid ID - [0;32mresolves[0m as expected [-> check snapshot 3]: > user1-activeWord1 < 1`] = `
+exports[`Test-data service "users" (3) has an [1;37masync[0m function [1;37mgetActiveWord()[0m which - when used with valid ID - [0;32mresolves[0m as expected [-> check snapshot 3]: > 1st activeWord of user1 < 1`] = `
 Object {
   "id": "(ID:user1-activeWord1)",
   "learnProgress": Array [
@@ -104,7 +104,7 @@ Object {
 }
 `;
 
-exports[`Test-data service "users" (4) has an [1;37masync[0m function [1;37mlistAllActiveWordsOfUser()[0m which - when used with valid user-ID - [0;32mresolves[0m as expected [-> check snapshot 4]: > all active-words of user1 < 1`] = `
+exports[`Test-data service "users" (4) has an [1;37masync[0m function [1;37mlistAllActiveWordsOfUser()[0m which - when used with valid ID - [0;32mresolves[0m as expected [-> check snapshot 4]: > all active-words of user1 < 1`] = `
 Array [
   Object {
     "id": "(ID:user1-activeWord1)",

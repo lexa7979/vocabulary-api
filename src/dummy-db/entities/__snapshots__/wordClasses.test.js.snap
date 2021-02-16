@@ -1,0 +1,102 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Test-data service "WordClasses" (1) has an [1;37masync[0m function [1;37mgetWordClass()[0m which - when used with valid ID - [0;32mresolves[0m with expected data [-> check snapshot 1]: > word-class "verb" < 1`] = `
+Object {
+  "id": "(ID:verb)",
+  "name_de": "Verb",
+}
+`;
+
+exports[`Test-data service "WordClasses" (2) has an [1;37masync[0m function [1;37mgetWordClassWithFlections()[0m which - when used with valid ID - [0;32mresolves[0m with expected data [-> check snapshot 2]: > word-class "verb" + flections < 1`] = `
+Object {
+  "flections": Array [
+    Object {
+      "classId": "(ID:verb)",
+      "id": "(ID:verb-flection1)",
+      "name_de": "Infinitiv",
+      "pos": 0,
+    },
+    Object {
+      "classId": "(ID:verb)",
+      "id": "(ID:verb-flection2)",
+      "name_de": "Präsens",
+      "pos": 1,
+    },
+    Object {
+      "classId": "(ID:verb)",
+      "id": "(ID:verb-flection3)",
+      "name_de": "Präteritum",
+      "pos": 2,
+    },
+    Object {
+      "classId": "(ID:verb)",
+      "id": "(ID:verb-flection4)",
+      "name_de": "Perfekt",
+      "pos": 3,
+    },
+    Object {
+      "classId": "(ID:verb)",
+      "id": "(ID:verb-flection5)",
+      "name_de": "Imperativ",
+      "pos": 4,
+    },
+  ],
+  "id": "(ID:verb)",
+  "name_de": "Verb",
+}
+`;
+
+exports[`Test-data service "WordClasses" (3) has an [1;37masync[0m function [1;37mlistAllWordClassIds()[0m which - when used w/o arguments - [0;32mresolves[0m with expected data [-> check snapshot 3]: > all word-classes < 1`] = `
+Array [
+  Object {
+    "id": "(ID:verb)",
+    "name_de": "Verb",
+  },
+  Object {
+    "id": "(ID:noun)",
+    "name_de": "Substantiv",
+  },
+  Object {
+    "id": "(ID:adjective)",
+    "name_de": "Adjektiv",
+  },
+]
+`;
+
+exports[`Test-data service "WordClasses" (4) has an [1;37masync[0m function [1;37mgetFlection()[0m which - when used with valid ID - [0;32mresolves[0m with expected data [-> check snapshot 4]: > 3rd flection of word-class "noun" < 1`] = `
+Object {
+  "classId": "(ID:noun)",
+  "id": "(ID:noun-flection3)",
+  "name_de": "Plural, unbestimmt",
+  "pos": 2,
+}
+`;
+
+exports[`Test-data service "WordClasses" (5) has an [1;37masync[0m function [1;37mlistAllFlectionsOfWordClass()[0m which - when used with valid ID - [0;32mresolves[0m with expected data [-> check snapshot 5]: > all flections of word-class "noun" < 1`] = `
+Array [
+  Object {
+    "classId": "(ID:noun)",
+    "id": "(ID:noun-flection1)",
+    "name_de": "Singular, unbestimmt",
+    "pos": 0,
+  },
+  Object {
+    "classId": "(ID:noun)",
+    "id": "(ID:noun-flection2)",
+    "name_de": "Singular, bestimmt",
+    "pos": 1,
+  },
+  Object {
+    "classId": "(ID:noun)",
+    "id": "(ID:noun-flection3)",
+    "name_de": "Plural, unbestimmt",
+    "pos": 2,
+  },
+  Object {
+    "classId": "(ID:noun)",
+    "id": "(ID:noun-flection4)",
+    "name_de": "Plural, bestimmt",
+    "pos": 3,
+  },
+]
+`;

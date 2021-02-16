@@ -5,8 +5,11 @@ module.exports = {
   resolvers: getResolvers(),
 };
 
+/**
+ * @returns {object}
+ */
 function getTypeDefs() {
-  const typeDefs = gql`
+  return gql`
     type Query {
       wordClass(id: UUID): WordClass
       wordClasses(first: Int = 0, offset: Int = 0): [WordClass!]!
@@ -27,66 +30,96 @@ function getTypeDefs() {
       wordClass: WordClass!
     }
   `;
-  return typeDefs;
 }
 
+/**
+ * @returns {object}
+ */
 function getResolvers() {
-  const resolvers = {
+  return {
     Query: {
-      wordClass: getWordClassById,
-      wordClasses: listWordClasses,
+      wordClass,
+      wordClasses,
     },
 
     WordClass: {
-      flections: listFlectionsOfWordClass,
+      flections: flectionsOfWordClass,
     },
 
     Flection: {
-      wordClass: getWordClassOfFlection,
+      wordClass: wordClassOfFlection,
     },
   };
-  return resolvers;
 }
 
-// eslint-disable-next-line no-unused-vars
-async function getWordClassById(parent, args, context, info) {
-  const { id } = args;
-  const { db } = context;
-
+/**
+ * @param {object} parent
+ * @param {{ id: string }} args
+ * @param {{ db: object }} context
+ *
+ * @throws
+ * @returns {Promise<object>}
+ */
+async function wordClass(parent, { id }, { db }) {
   // eslint-disable-next-line camelcase
   const { name_de } = await db.getWordClass(id);
-  return { id, name_de };
+  return {
+    id,
+    name_de,
+  };
 }
 
-// eslint-disable-next-line no-unused-vars
-async function listWordClasses(parent, args, context, info) {
-  const { first, offset } = args;
-  const { db } = context;
-
+/**
+ * @param {object} parent
+ * @param {{ first: number, offset: number }} args
+ * @param {{ db: object }} context
+ *
+ * @throws
+ * @returns {Promise<object[]>}
+ */
+async function wordClasses(parent, { first, offset }, { db }) {
   const list = await db.listAllWordClasses(first, offset);
-  return list;
-}
-
-// eslint-disable-next-line no-unused-vars
-async function listFlectionsOfWordClass(parent, args, context, info) {
-  const { id: classId } = parent;
-  const { first, offset } = args;
-  const { db } = context;
-
-  const list = await db.listAllFlectionsOfWordClass(classId, first, offset);
-
-  const results = list.map(item => ({ id: item.id, name_de: item.name_de, pos: item.pos }));
+  // eslint-disable-next-line camelcase
+  const results = list.map(({ id, name_de }) => ({
+    id,
+    name_de,
+  }));
   return results;
 }
 
-// eslint-disable-next-line no-unused-vars
-async function getWordClassOfFlection(parent, args, context, info) {
-  const { id: flectionId } = parent;
-  const { db } = context;
-
-  const { classId } = await db.getFlection(flectionId);
+/**
+ * @param {{ id: string }} parent
+ * @param {{ first: number, offset: number }} args
+ * @param {{ db: object }} context
+ *
+ * @throws
+ * @returns {Promise<object[]>}
+ */
+async function flectionsOfWordClass({ id: classId }, { first, offset }, { db }) {
+  const list = await db.listAllFlectionsOfWordClass(classId, first, offset);
   // eslint-disable-next-line camelcase
-  const { name_de } = await db.getWordClass(classId);
+  const results = list.map(({ id, name_de, pos }) => ({
+    id,
+    name_de,
+    pos,
+  }));
+  return results;
+}
 
-  return { id: classId, name_de };
+/**
+ * @param {{ id: string }} parent
+ * @param {object} args
+ * @param {{ db: object }} context
+ *
+ * @throws
+ * @returns {Promise<object>}
+ */
+async function wordClassOfFlection({ id: flectionId }, args, { db }) {
+  const { classId: id } = await db.getFlection(flectionId);
+  // eslint-disable-next-line camelcase
+  const { name_de } = await db.getWordClass(id);
+  return {
+    id,
+    name_de,
+  };
 }

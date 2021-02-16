@@ -5,8 +5,11 @@ module.exports = {
   resolvers: getResolvers(),
 };
 
+/**
+ * @returns {object}
+ */
 function getTypeDefs() {
-  const typeDefs = gql`
+  return gql`
     type Query {
       word(id: UUID): Word
       words(first: Int = 0, offset: Int = 0): [Word!]!
@@ -28,94 +31,129 @@ function getTypeDefs() {
       word: Word!
     }
   `;
-  return typeDefs;
 }
 
+/**
+ * @returns {object}
+ */
 function getResolvers() {
-  const resolvers = {
+  return {
     Query: {
-      word: getWordById,
-      words: listWords,
+      word,
+      words,
     },
 
     Word: {
-      wordClass: getWordClassOfWord,
-      translations: listTranslationsOfWord,
+      wordClass: wordClassOfWord,
+      translations: translationsOfWord,
     },
 
     Translation: {
-      flection: getFlectionOfTranslation,
-      word: getWordOfTranslation,
+      flection: flectionOfTranslation,
+      word: wordOfTranslation,
     },
   };
-  return resolvers;
 }
 
-// eslint-disable-next-line no-unused-vars
-async function getWordById(parent, args, context, info) {
-  const { id } = args;
-  const { db } = context;
-
+/**
+ * @param {object} parent
+ * @param {{ id: string }} args
+ * @param {{ db: object }} context
+ *
+ * @throws
+ * @returns {Promise<object>}
+ */
+async function word(parent, { id }, { db }) {
   await db.getWord(id);
-
-  return { id };
+  return {
+    id,
+  };
 }
 
-// eslint-disable-next-line no-unused-vars
-async function listWords(parent, args, context, info) {
-  const { first, offset } = args;
-  const { db } = context;
-
+/**
+ * @param {object} parent
+ * @param {{ first: number, offset: number }} args
+ * @param {{ db: object }} context
+ *
+ * @throws
+ * @returns {Promise<object[]>}
+ */
+async function words(parent, { first, offset }, { db }) {
   const list = await db.listAllWords(first, offset);
-
-  const results = list.map(item => ({ id: item.id }));
+  const results = list.map(({ id }) => ({
+    id,
+  }));
   return results;
 }
 
-// eslint-disable-next-line no-unused-vars
-async function getWordClassOfWord(parent, args, context, info) {
-  const { id: wordId } = parent;
-  const { db } = context;
-
-  const { classId } = await db.getWord(wordId);
+/**
+ * @param {{ id: string }} parent
+ * @param {object} args
+ * @param {{ db: object }} context
+ *
+ * @throws
+ * @returns {Promise<object>}
+ */
+async function wordClassOfWord({ id: wordId }, args, { db }) {
+  const { classId: id } = await db.getWord(wordId);
   // eslint-disable-next-line camelcase
-  const { name_de } = await db.getWordClass(classId);
-
-  return { id: classId, name_de };
+  const { name_de } = await db.getWordClass(id);
+  return {
+    id,
+    name_de,
+  };
 }
 
-// eslint-disable-next-line no-unused-vars
-async function listTranslationsOfWord(parent, args, context, info) {
-  const { id: wordId } = parent;
-  const { first, offset } = args;
-  const { db } = context;
-
+/**
+ * @param {{ id: string }} parent
+ * @param {{ first: number, offset: number }} args
+ * @param {{ db: object}} context
+ *
+ * @throws
+ * @returns {Promise<object[]>}
+ */
+async function translationsOfWord({ id: wordId }, { first, offset }, { db }) {
   const list = await db.listAllTranslationsOfWord(wordId, first, offset);
-
-  const results = list.map(item => ({ id: item.id, text_de: item.text_de, text_sv: item.text_sv }));
+  // eslint-disable-next-line camelcase
+  const results = list.map(({ id, text_de, text_sv }) => ({
+    id,
+    text_de,
+    text_sv,
+  }));
   return results;
 }
 
-// eslint-disable-next-line no-unused-vars
-async function getFlectionOfTranslation(parent, args, context, info) {
-  const { id: translationId } = parent;
-  const { db } = context;
-
-  const { flectionId } = await db.getTranslation(translationId);
+/**
+ * @param {{ id: string }} parent
+ * @param {object} args
+ * @param {{ db: object }} context
+ *
+ * @throws
+ * @returns {Promise<object>}
+ */
+async function flectionOfTranslation({ id: translationId }, args, { db }) {
+  const { flectionId: id } = await db.getTranslation(translationId);
   // eslint-disable-next-line camelcase
-  const { name_de, pos } = await db.getFlection(flectionId);
-
-  return { id: flectionId, name_de, pos };
+  const { name_de, pos } = await db.getFlection(id);
+  return {
+    id,
+    name_de,
+    pos,
+  };
 }
 
-// eslint-disable-next-line no-unused-vars
-async function getWordOfTranslation(parent, args, context, info) {
-  const { id: translationId } = parent;
-  const { db } = context;
-
-  const { wordId } = await db.getTranslation(translationId);
-  // eslint-disable-next-line camelcase
-  const { name_de } = await db.getWord(wordId);
-
-  return { id: wordId, name_de };
+/**
+ * @param {{ id: string }} parent
+ * @param {object} args
+ * @param {{ db: object }} context
+ *
+ * @throws
+ * @returns {Promise<object>}
+ */
+async function wordOfTranslation({ id: translationId }, args, { db }) {
+  const { wordId: id } = await db.getTranslation(translationId);
+  await db.getWord(id);
+  return {
+    id,
+  };
 }

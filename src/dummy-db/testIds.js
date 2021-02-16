@@ -18,7 +18,8 @@ const Global = {
 module.exports = {
   getTestId,
   _testHelpers: {
-    copyObjectButRemoveUUIDs,
+    copyObjectButReplaceUUIDs,
+    findKeyOfTestId,
   },
 };
 
@@ -29,13 +30,13 @@ function getTestId(key) {
   return Global.idBuffer[key];
 }
 
-function copyObjectButRemoveUUIDs(input) {
+function copyObjectButReplaceUUIDs(input) {
   const matchUUID = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
 
   const _deepCopy = source => {
     if (source == null || typeof source !== 'object') {
       return typeof source === 'string' && matchUUID.test(source)
-        ? `(ID:${_findKeyOfTestId(source)})`
+        ? `(ID:${findKeyOfTestId(source)})`
         : source;
     }
     if (Array.isArray(source)) {
@@ -49,14 +50,14 @@ function copyObjectButRemoveUUIDs(input) {
   };
 
   if (input instanceof Promise) {
-    throw new Error("copyObjectButRemoveUUIDs failed() - won't process a Promise");
+    throw new Error("copyObjectButReplaceUUIDs failed() - won't process a Promise");
   }
 
   const result = _deepCopy(input);
   return result;
 }
 
-function _findKeyOfTestId(id) {
+function findKeyOfTestId(id) {
   let result = null;
   Object.keys(Global.idBuffer).forEach(key => {
     if (Global.idBuffer[key] === id) {

@@ -5,8 +5,11 @@ module.exports = {
   resolvers: getResolvers(),
 };
 
+/**
+ * @returns {object}
+ */
 function getTypeDefs() {
-  const typeDefs = gql`
+  return gql`
     type Query {
       user(id: UUID): User
       users(first: Int = 0, offset: Int = 0): [User!]!
@@ -20,54 +23,77 @@ function getTypeDefs() {
       activeWords(first: Int = 0, offset: Int = 0): [Word!]!
     }
   `;
-  return typeDefs;
 }
 
+/**
+ * @returns {object}
+ */
 function getResolvers() {
-  const resolvers = {
+  return {
     Query: {
-      user: getUserById,
-      users: listUsers,
+      user,
+      users,
     },
 
     User: {
-      activeWords: getActiveWordsOfUser,
+      activeWords: activeWordsOfUser,
     },
   };
-  return resolvers;
 }
 
-// eslint-disable-next-line no-unused-vars
-async function getActiveWordsOfUser(parent, args, context, info) {
-  const { id: userId } = parent;
-  const { first, offset } = args;
-  const { db } = context;
+/**
+ * @param {object} parent
+ * @param {{ id: string }} args
+ * @param {{ db: object }} context
+ *
+ * @throws
+ * @returns {Promise<object>}
+ */
+async function user(parent, { id }, { db }) {
+  const { login, name, currStep } = await db.getUser(id);
+  return {
+    id,
+    login,
+    name,
+    currStep,
+  };
+}
 
-  const { activeWords } = await db.getUser(userId);
-  const list = activeWords.slice(offset, first ? offset + first : undefined);
-
-  const results = await Promise.all(
-    list.map(item => db.getWord(item.wordId).then(() => item.wordId))
-  );
+/**
+ * @param {object} parent
+ * @param {{ first: number, offset: number}} args
+ * @param {{ db: object }} context
+ *
+ * @throws
+ * @returns {Promise<object[]>}
+ */
+async function users(parent, { first, offset }, { db }) {
+  const list = await db.listAllUsers(first, offset);
+  const results = list.map(({ id, login, name }) => ({
+    id,
+    login,
+    name,
+  }));
   return results;
 }
 
-// eslint-disable-next-line no-unused-vars
-async function getUserById(parent, args, context, info) {
-  const { id } = args;
-  const { db } = context;
-
-  const { login, name, currStep } = await db.getUser(id);
-  return { id, login, name, currStep };
-}
-
-// eslint-disable-next-line no-unused-vars
-async function listUsers(parent, args, context, info) {
-  const { first, offset } = args;
-  const { db } = context;
-
-  const list = await db.listAllUsers(first, offset);
-
-  const results = list.map(item => ({ id: item.id, login: item.login, name: item.name }));
+/**
+ * @param {{ id: string }} parent
+ * @param {{ first: number, offset: number }} args
+ * @param {{ db: object }} context
+ *
+ * @throws
+ * @returns {Promise<object[]>}
+ */
+async function activeWordsOfUser({ id: userId }, { first, offset }, { db }) {
+  const list = await db.listAllActiveWordsOfUser(userId, first, offset);
+  const results = await Promise.all(
+    list.map(async ({ wordId: id }) => {
+      await db.getWord(id);
+      return {
+        id,
+      };
+    })
+  );
   return results;
 }
