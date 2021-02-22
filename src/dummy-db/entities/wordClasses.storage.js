@@ -1,25 +1,25 @@
-const { getTestId } = require('../testIds');
+const { getUUID } = require('../../utils/dummyData');
 
 const allWordClasses = [
   {
-    id: getTestId('verb'),
+    id: getUUID('verb'),
     name_de: 'Verb',
   },
   {
-    id: getTestId('noun'),
+    id: getUUID('noun'),
     name_de: 'Substantiv',
   },
   {
-    id: getTestId('adjective'),
+    id: getUUID('adjective'),
     name_de: 'Adjektiv',
   },
 ];
 
 const _getFlectionItems = (classIdKey, ...listOfFlectionNames) => {
-  const classId = getTestId(classIdKey);
+  const classId = getUUID(classIdKey);
   // eslint-disable-next-line camelcase
   return listOfFlectionNames.map((name_de, index) => ({
-    id: getTestId(`${classIdKey}-flection${index + 1}`),
+    id: getUUID(`${classIdKey}-flection${index + 1}`),
     classId,
     pos: index,
     name_de,

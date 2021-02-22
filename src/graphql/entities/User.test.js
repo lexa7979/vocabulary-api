@@ -1,6 +1,6 @@
 const db = require('../../dummy-db');
 
-const { getTestId, _testHelpers: TestIdHelpers } = require('../../dummy-db/testIds');
+const { getUUID, copyObjectButReplaceUUIDs } = require('../../utils/dummyData');
 
 const { resolvers } = require('./User');
 
@@ -39,11 +39,11 @@ function runTestsAboutQueryWithUser() {
 
     it(`- when used with user-ID in "args" - ${RESOLVES} as expected`, async () => {
       const parent = null;
-      const args = { id: getTestId('user1') };
+      const args = { id: getUUID('user1') };
 
       const result = await user(parent, args, context);
 
-      const copy = TestIdHelpers.copyObjectButReplaceUUIDs(result);
+      const copy = copyObjectButReplaceUUIDs(result);
       expect(copy).toMatchInlineSnapshot(`
         Object {
           "currStep": 8,
@@ -70,7 +70,7 @@ function runTestsAboutQueryWithUsers() {
 
       const result = await users(parent, args, context);
 
-      const copy = TestIdHelpers.copyObjectButReplaceUUIDs(result);
+      const copy = copyObjectButReplaceUUIDs(result);
       expect(copy).toMatchInlineSnapshot(`
         Array [
           Object {
@@ -94,12 +94,12 @@ function runTestsAboutUserWithActiveWords() {
       expect(activeWords).toHaveLength(3));
 
     it(`- when used with user-ID in "parent", "first" and "offset" in "args" - ${RESOLVES} as expected`, async () => {
-      const parent = { id: getTestId('user1') };
+      const parent = { id: getUUID('user1') };
       const args = { first: 1, offset: 1 };
 
       const result = await activeWords(parent, args, context);
 
-      const copy = TestIdHelpers.copyObjectButReplaceUUIDs(result);
+      const copy = copyObjectButReplaceUUIDs(result);
       expect(copy).toMatchInlineSnapshot(`
         Array [
           Object {

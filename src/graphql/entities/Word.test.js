@@ -1,5 +1,5 @@
 const db = require('../../dummy-db');
-const { getTestId, _testHelpers: TestIdHelpers } = require('../../dummy-db/testIds');
+const { getUUID, copyObjectButReplaceUUIDs } = require('../../utils/dummyData');
 
 const { resolvers } = require('./Word');
 
@@ -47,11 +47,11 @@ function runTestsAboutQueryWithWord() {
 
     it(`- when used with word-ID in "args" - ${RESOLVES} as expected`, async () => {
       const parent = null;
-      const args = { id: getTestId('word3') };
+      const args = { id: getUUID('word3') };
 
       const result = await word(parent, args, context);
 
-      const copy = TestIdHelpers.copyObjectButReplaceUUIDs(result);
+      const copy = copyObjectButReplaceUUIDs(result);
       expect(copy).toMatchInlineSnapshot(`
         Object {
           "id": "(ID:word3)",
@@ -75,7 +75,7 @@ function runTestsAboutQueryWithWords() {
 
       const result = await words(parent, args, context);
 
-      const copy = TestIdHelpers.copyObjectButReplaceUUIDs(result);
+      const copy = copyObjectButReplaceUUIDs(result);
       expect(copy).toMatchInlineSnapshot(`
         Array [
           Object {
@@ -100,12 +100,12 @@ function runTestsAboutWordWithWordClass() {
       expect(wordClass).toHaveLength(3));
 
     it(`- when used with word-ID in "parent" - ${RESOLVES} as expected`, async () => {
-      const parent = { id: getTestId('word1') };
+      const parent = { id: getUUID('word1') };
       const args = null;
 
       const result = await wordClass(parent, args, context);
 
-      const copy = TestIdHelpers.copyObjectButReplaceUUIDs(result);
+      const copy = copyObjectButReplaceUUIDs(result);
       expect(copy).toMatchInlineSnapshot(`
         Object {
           "id": "(ID:verb)",
@@ -126,12 +126,12 @@ function runTestsAboutWordWithTranslations() {
       expect(translations).toHaveLength(3));
 
     it(`- when used with word-ID in "parent", "first" and "offset" in "args" - ${RESOLVES} as expected`, async () => {
-      const parent = { id: getTestId('word1') };
+      const parent = { id: getUUID('word1') };
       const args = { first: 3, offset: 2 };
 
       const result = await translations(parent, args, context);
 
-      const copy = TestIdHelpers.copyObjectButReplaceUUIDs(result);
+      const copy = copyObjectButReplaceUUIDs(result);
       expect(copy).toMatchInlineSnapshot(`
         Array [
           Object {
@@ -165,12 +165,12 @@ function runTestsAboutTranslationWithFlection() {
       expect(flection).toHaveLength(3));
 
     it(`- when used with translation-ID in "parent" - ${RESOLVES} as expected`, async () => {
-      const parent = { id: getTestId('word1-translation3') };
+      const parent = { id: getUUID('word1-translation3') };
       const args = null;
 
       const result = await flection(parent, args, context);
 
-      const copy = TestIdHelpers.copyObjectButReplaceUUIDs(result);
+      const copy = copyObjectButReplaceUUIDs(result);
       expect(copy).toMatchInlineSnapshot(`
         Object {
           "id": "(ID:verb-flection2)",
@@ -191,12 +191,12 @@ function runTestsAboutTranslationWithWord() {
     it(`${EXPECTS} three arguments (parent, args, context)`, () => expect(word).toHaveLength(3));
 
     it(`- when used with translation-ID in "parent" - ${RESOLVES} as expected`, async () => {
-      const parent = { id: getTestId('word1-translation3') };
+      const parent = { id: getUUID('word1-translation3') };
       const args = null;
 
       const result = await word(parent, args, context);
 
-      const copy = TestIdHelpers.copyObjectButReplaceUUIDs(result);
+      const copy = copyObjectButReplaceUUIDs(result);
       expect(copy).toMatchInlineSnapshot(`
         Object {
           "id": "(ID:word1)",

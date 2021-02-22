@@ -1,5 +1,5 @@
 const db = require('../../dummy-db');
-const { getTestId, _testHelpers: TestIdHelpers } = require('../../dummy-db/testIds');
+const { getUUID, copyObjectButReplaceUUIDs } = require('../../utils/dummyData');
 
 const { resolvers } = require('./WordClass');
 
@@ -44,11 +44,11 @@ function runTestsAboutQueryWithWordClass() {
 
     it(`- when used with class-ID in "args" - ${RESOLVES} as expected`, async () => {
       const parent = null;
-      const args = { id: getTestId('noun') };
+      const args = { id: getUUID('noun') };
 
       const result = await wordClass(parent, args, context);
 
-      const copy = TestIdHelpers.copyObjectButReplaceUUIDs(result);
+      const copy = copyObjectButReplaceUUIDs(result);
       expect(copy).toMatchInlineSnapshot(`
         Object {
           "id": "(ID:noun)",
@@ -74,7 +74,7 @@ function runTestsAboutQueryWithWordClasses() {
 
       const result = await wordClasses(parent, args, context);
 
-      const copy = TestIdHelpers.copyObjectButReplaceUUIDs(result);
+      const copy = copyObjectButReplaceUUIDs(result);
       expect(copy).toMatchInlineSnapshot(`
         Array [
           Object {
@@ -101,12 +101,12 @@ function runTestsAboutWordClassWithFlections() {
       expect(flections).toHaveLength(3));
 
     it(`- when used with class-ID in "parent", "first" and "offset" in "args" - ${RESOLVES} as expected`, async () => {
-      const parent = { id: getTestId('noun') };
+      const parent = { id: getUUID('noun') };
       const args = { first: 1, offset: 2 };
 
       const result = await flections(parent, args, context);
 
-      const copy = TestIdHelpers.copyObjectButReplaceUUIDs(result);
+      const copy = copyObjectButReplaceUUIDs(result);
       expect(copy).toMatchInlineSnapshot(`
         Array [
           Object {
@@ -130,12 +130,12 @@ function runTestsAboutFlectionWithWordClass() {
       expect(wordClass).toHaveLength(3));
 
     it(`- when used with flection-ID in "parent" - ${RESOLVES} as expected`, async () => {
-      const parent = { id: getTestId('noun-flection3') };
+      const parent = { id: getUUID('noun-flection3') };
       const args = null;
 
       const result = await wordClass(parent, args, context);
 
-      const copy = TestIdHelpers.copyObjectButReplaceUUIDs(result);
+      const copy = copyObjectButReplaceUUIDs(result);
       expect(copy).toMatchInlineSnapshot(`
         Object {
           "id": "(ID:noun)",

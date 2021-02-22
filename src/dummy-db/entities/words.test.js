@@ -1,4 +1,4 @@
-const { getTestId, _testHelpers: TestIdHelpers } = require('../testIds');
+const { getUUID, copyObjectButReplaceUUIDs } = require('../../utils/dummyData');
 
 const Words = require('./words');
 
@@ -39,14 +39,14 @@ function runTestsAboutGetWord() {
       expect(getWord).rejects.toThrow('invalid ID'));
 
     it(`- when used with valid ID - ${RESOLVES} as expected ${_nextSnapshotHint()}`, async () => {
-      const result = await getWord(getTestId('word1'));
+      const result = await getWord(getUUID('word1'));
 
-      const copy = TestIdHelpers.copyObjectButReplaceUUIDs(result);
+      const copy = copyObjectButReplaceUUIDs(result);
       expect(copy).toMatchSnapshot(`> word1 <`);
     });
 
     it(`- when used with invalid ID - ${REJECTS} as expected`, () =>
-      expect(() => getWord(getTestId('invalid'))).rejects.toThrow('invalid ID'));
+      expect(() => getWord(getUUID('invalid'))).rejects.toThrow('invalid ID'));
   });
 }
 
@@ -64,14 +64,14 @@ function runTestsAboutGetWordWithTranslations() {
       expect(getWordWithTranslations).rejects.toThrow('invalid ID'));
 
     it(`- when used with valid ID - ${RESOLVES} as expected ${_nextSnapshotHint()}`, async () => {
-      const result = await getWordWithTranslations(getTestId('word2'));
+      const result = await getWordWithTranslations(getUUID('word2'));
 
-      const copy = TestIdHelpers.copyObjectButReplaceUUIDs(result);
+      const copy = copyObjectButReplaceUUIDs(result);
       expect(copy).toMatchSnapshot(`> word2 + translations <`);
     });
 
     it(`- when used with invalid ID - ${REJECTS} as expected`, () =>
-      expect(() => getWordWithTranslations(getTestId('invalid'))).rejects.toThrow('invalid ID'));
+      expect(() => getWordWithTranslations(getUUID('invalid'))).rejects.toThrow('invalid ID'));
   });
 }
 
@@ -86,14 +86,14 @@ function runTestsAboutListAllWords() {
     it(`- when used w/o arguments - ${RESOLVES} as expected ${_nextSnapshotHint()}`, async () => {
       const result = await listAllWords();
 
-      const copy = TestIdHelpers.copyObjectButReplaceUUIDs(result);
+      const copy = copyObjectButReplaceUUIDs(result);
       expect(copy).toMatchSnapshot(`> all words <`);
     });
 
     it(`- when used with argument "first" - ${RESOLVES} as expected`, async () => {
       const result = await listAllWords(4, undefined);
 
-      const copy = TestIdHelpers.copyObjectButReplaceUUIDs(result);
+      const copy = copyObjectButReplaceUUIDs(result);
       expect(copy.map(({ id }) => id)).toMatchInlineSnapshot(`
         Array [
           "(ID:word1)",
@@ -107,7 +107,7 @@ function runTestsAboutListAllWords() {
     it(`- when used with argument "offset" - ${RESOLVES} as expected`, async () => {
       const result = await listAllWords(undefined, 8);
 
-      const copy = TestIdHelpers.copyObjectButReplaceUUIDs(result);
+      const copy = copyObjectButReplaceUUIDs(result);
       expect(copy.map(({ id }) => id)).toMatchInlineSnapshot(`
         Array [
           "(ID:word9)",
@@ -132,14 +132,14 @@ function runTestsAboutGetTranslation() {
       expect(getTranslation).rejects.toThrow('invalid ID'));
 
     it(`- when used with valid ID - ${RESOLVES} as expected ${_nextSnapshotHint()}`, async () => {
-      const result = await getTranslation(getTestId('word1-translation1'));
+      const result = await getTranslation(getUUID('word1-translation1'));
 
-      const copy = TestIdHelpers.copyObjectButReplaceUUIDs(result);
+      const copy = copyObjectButReplaceUUIDs(result);
       expect(copy).toMatchSnapshot(`> 1st translation of word1 <`);
     });
 
     it(`- when used with invalid ID - ${REJECTS} as expected`, () =>
-      expect(() => getTranslation(getTestId('invalid'))).rejects.toThrow('invalid ID'));
+      expect(() => getTranslation(getUUID('invalid'))).rejects.toThrow('invalid ID'));
   });
 }
 
@@ -157,16 +157,16 @@ function runTestsAboutListAllTranslationsOfWord() {
       expect(listAllTranslationsOfWord()).resolves.toEqual([]));
 
     it(`- when used with valid ID - ${RESOLVES} as expected ${_nextSnapshotHint()}`, async () => {
-      const results = await listAllTranslationsOfWord(getTestId('word1'));
+      const results = await listAllTranslationsOfWord(getUUID('word1'));
 
-      const copy = TestIdHelpers.copyObjectButReplaceUUIDs(results);
+      const copy = copyObjectButReplaceUUIDs(results);
       expect(copy).toMatchSnapshot(`> all translations of word1 <`);
     });
 
     it(`- when used with valid ID and argument "first" - ${RESOLVES} as expected`, async () => {
-      const result = await listAllTranslationsOfWord(getTestId('word1'), 3, undefined);
+      const result = await listAllTranslationsOfWord(getUUID('word1'), 3, undefined);
 
-      const copy = TestIdHelpers.copyObjectButReplaceUUIDs(result);
+      const copy = copyObjectButReplaceUUIDs(result);
       expect(copy.map(({ id }) => id)).toMatchInlineSnapshot(`
         Array [
           "(ID:word1-translation1)",
@@ -177,9 +177,9 @@ function runTestsAboutListAllTranslationsOfWord() {
     });
 
     it(`- when used with valid ID and argument "offset" - ${RESOLVES} as expected`, async () => {
-      const result = await listAllTranslationsOfWord(getTestId('word1'), undefined, 3);
+      const result = await listAllTranslationsOfWord(getUUID('word1'), undefined, 3);
 
-      const copy = TestIdHelpers.copyObjectButReplaceUUIDs(result);
+      const copy = copyObjectButReplaceUUIDs(result);
       expect(copy.map(({ id }) => id)).toMatchInlineSnapshot(`
         Array [
           "(ID:word1-translation4)",
@@ -191,7 +191,7 @@ function runTestsAboutListAllTranslationsOfWord() {
     });
 
     it(`- when used with invalid word-ID - ${RESOLVES} with empty array`, async () => {
-      const result = await listAllTranslationsOfWord(getTestId('invalid'));
+      const result = await listAllTranslationsOfWord(getUUID('invalid'));
 
       expect(result).toEqual([]);
     });

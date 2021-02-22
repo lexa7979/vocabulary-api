@@ -1,4 +1,4 @@
-const { getTestId, _testHelpers: TestIdHelpers } = require('../testIds');
+const { getUUID, copyObjectButReplaceUUIDs } = require('../../utils/dummyData');
 
 const WordClasses = require('./wordClasses');
 
@@ -41,9 +41,9 @@ function runTestsAboutGetWordClass() {
     });
 
     it(`- when used with valid ID - ${RESOLVES} with expected data ${_nextSnapshotHint()}`, async () => {
-      const wordClass = await getWordClass(getTestId('verb'));
+      const wordClass = await getWordClass(getUUID('verb'));
 
-      const copy = TestIdHelpers.copyObjectButReplaceUUIDs(wordClass);
+      const copy = copyObjectButReplaceUUIDs(wordClass);
       expect(copy).toMatchSnapshot('> word-class "verb" <');
     });
   });
@@ -64,9 +64,9 @@ function runTestsAboutGetWordClassWithFlections() {
     });
 
     it(`- when used with valid ID - ${RESOLVES} with expected data ${_nextSnapshotHint()}`, async () => {
-      const wordClass = await getWordClassWithFlections(getTestId('verb'));
+      const wordClass = await getWordClassWithFlections(getUUID('verb'));
 
-      const copy = TestIdHelpers.copyObjectButReplaceUUIDs(wordClass);
+      const copy = copyObjectButReplaceUUIDs(wordClass);
       expect(copy).toMatchSnapshot('> word-class "verb" + flections <');
     });
   });
@@ -85,14 +85,14 @@ function runTestsAboutListAllWordClasses() {
     it(`- when used w/o arguments - ${RESOLVES} with expected data ${_nextSnapshotHint()}`, async () => {
       const wordClasses = await listAllWordClasses();
 
-      const copy = TestIdHelpers.copyObjectButReplaceUUIDs(wordClasses);
+      const copy = copyObjectButReplaceUUIDs(wordClasses);
       expect(copy).toMatchSnapshot('> all word-classes <');
     });
 
     it(`- when used with argument "first" - ${RESOLVES} with expected data`, async () => {
       const wordClasses = await listAllWordClasses(1, undefined);
 
-      const copy = TestIdHelpers.copyObjectButReplaceUUIDs(wordClasses);
+      const copy = copyObjectButReplaceUUIDs(wordClasses);
       expect(copy.map(({ id }) => id)).toMatchInlineSnapshot(`
         Array [
           "(ID:verb)",
@@ -103,7 +103,7 @@ function runTestsAboutListAllWordClasses() {
     it(`- when used with argument "offset" - ${RESOLVES} with expected data`, async () => {
       const wordClasses = await listAllWordClasses(undefined, 1);
 
-      const copy = TestIdHelpers.copyObjectButReplaceUUIDs(wordClasses);
+      const copy = copyObjectButReplaceUUIDs(wordClasses);
       expect(copy.map(({ id }) => id)).toMatchInlineSnapshot(`
         Array [
           "(ID:noun)",
@@ -115,7 +115,7 @@ function runTestsAboutListAllWordClasses() {
     it(`- when used with arguments "first" and "offset" - ${RESOLVES} with expected data`, async () => {
       const wordClasses = await listAllWordClasses(1, 1);
 
-      const copy = TestIdHelpers.copyObjectButReplaceUUIDs(wordClasses);
+      const copy = copyObjectButReplaceUUIDs(wordClasses);
       expect(copy.map(({ id }) => id)).toMatchInlineSnapshot(`
         Array [
           "(ID:noun)",
@@ -138,9 +138,9 @@ function runTestsAboutGetFlection() {
     });
 
     it(`- when used with valid ID - ${RESOLVES} with expected data ${_nextSnapshotHint()}`, async () => {
-      const flection = await getFlection(getTestId('noun-flection3'));
+      const flection = await getFlection(getUUID('noun-flection3'));
 
-      const copy = TestIdHelpers.copyObjectButReplaceUUIDs(flection);
+      const copy = copyObjectButReplaceUUIDs(flection);
       expect(copy).toMatchSnapshot('> 3rd flection of word-class "noun" <');
     });
   });
@@ -163,16 +163,16 @@ function runTestsAboutListAllFlectionsOfWordClass() {
     });
 
     it(`- when used with valid ID - ${RESOLVES} with expected data ${_nextSnapshotHint()}`, async () => {
-      const flections = await listAllFlectionsOfWordClass(getTestId('noun'));
+      const flections = await listAllFlectionsOfWordClass(getUUID('noun'));
 
-      const copy = TestIdHelpers.copyObjectButReplaceUUIDs(flections);
+      const copy = copyObjectButReplaceUUIDs(flections);
       expect(copy).toMatchSnapshot('> all flections of word-class "noun" <');
     });
 
     it(`- when used with valid ID and argument "first" - ${RESOLVES} with expected data`, async () => {
-      const result = await listAllFlectionsOfWordClass(getTestId('noun'), 2, undefined);
+      const result = await listAllFlectionsOfWordClass(getUUID('noun'), 2, undefined);
 
-      const copy = TestIdHelpers.copyObjectButReplaceUUIDs(result);
+      const copy = copyObjectButReplaceUUIDs(result);
       expect(copy.map(({ id }) => id)).toMatchInlineSnapshot(`
         Array [
           "(ID:noun-flection1)",
@@ -182,9 +182,9 @@ function runTestsAboutListAllFlectionsOfWordClass() {
     });
 
     it(`- when used with valid ID and argument "offset" - ${RESOLVES} with expected data`, async () => {
-      const result = await listAllFlectionsOfWordClass(getTestId('noun'), undefined, 1);
+      const result = await listAllFlectionsOfWordClass(getUUID('noun'), undefined, 1);
 
-      const copy = TestIdHelpers.copyObjectButReplaceUUIDs(result);
+      const copy = copyObjectButReplaceUUIDs(result);
       expect(copy.map(({ id }) => id)).toMatchInlineSnapshot(`
         Array [
           "(ID:noun-flection2)",
@@ -195,9 +195,9 @@ function runTestsAboutListAllFlectionsOfWordClass() {
     });
 
     it(`- when used with valid ID, arguments "first" and "offset" - ${RESOLVES} with expected data`, async () => {
-      const result = await listAllFlectionsOfWordClass(getTestId('noun'), 2, 1);
+      const result = await listAllFlectionsOfWordClass(getUUID('noun'), 2, 1);
 
-      const copy = TestIdHelpers.copyObjectButReplaceUUIDs(result);
+      const copy = copyObjectButReplaceUUIDs(result);
       expect(copy.map(({ id }) => id)).toMatchInlineSnapshot(`
         Array [
           "(ID:noun-flection2)",

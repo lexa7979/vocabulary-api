@@ -1,26 +1,26 @@
-const { getTestId } = require('../testIds');
+const { getUUID } = require('../../utils/dummyData');
 
 const allWords = [
-  { id: getTestId('word1'), classId: getTestId('verb') },
-  { id: getTestId('word2'), classId: getTestId('noun') },
-  { id: getTestId('word3'), classId: getTestId('adjective') },
-  { id: getTestId('word4'), classId: getTestId('noun') },
-  { id: getTestId('word5'), classId: getTestId('noun') },
-  { id: getTestId('word6'), classId: getTestId('noun') },
-  { id: getTestId('word7'), classId: getTestId('noun') },
-  { id: getTestId('word8'), classId: getTestId('noun') },
-  { id: getTestId('word9'), classId: getTestId('noun') },
-  { id: getTestId('word10'), classId: getTestId('noun') },
-  { id: getTestId('word11'), classId: getTestId('noun') },
-  { id: getTestId('word12'), classId: getTestId('noun') },
+  { id: getUUID('word1'), classId: getUUID('verb') },
+  { id: getUUID('word2'), classId: getUUID('noun') },
+  { id: getUUID('word3'), classId: getUUID('adjective') },
+  { id: getUUID('word4'), classId: getUUID('noun') },
+  { id: getUUID('word5'), classId: getUUID('noun') },
+  { id: getUUID('word6'), classId: getUUID('noun') },
+  { id: getUUID('word7'), classId: getUUID('noun') },
+  { id: getUUID('word8'), classId: getUUID('noun') },
+  { id: getUUID('word9'), classId: getUUID('noun') },
+  { id: getUUID('word10'), classId: getUUID('noun') },
+  { id: getUUID('word11'), classId: getUUID('noun') },
+  { id: getUUID('word12'), classId: getUUID('noun') },
 ];
 
 const _getTranslationItems = (wordIdKey, ...listOfFlectionIdKeyWithTextTuple) => {
-  const wordId = getTestId(wordIdKey);
+  const wordId = getUUID(wordIdKey);
   // eslint-disable-next-line camelcase
   return listOfFlectionIdKeyWithTextTuple.map(([flectionIdKey, text_de, text_sv], index) => {
-    const id = getTestId(`${wordIdKey}-translation${index + 1}`);
-    const flectionId = getTestId(flectionIdKey);
+    const id = getUUID(`${wordIdKey}-translation${index + 1}`);
+    const flectionId = getUUID(flectionIdKey);
     return { id, wordId, flectionId, text_de, text_sv };
   });
 };
