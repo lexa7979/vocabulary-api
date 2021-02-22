@@ -26,9 +26,9 @@ const allUsers = [
 ];
 
 const _getLearnProgress = (getFlectionKey, ...dataOfSingleFlections) =>
-  dataOfSingleFlections.map(([success, failure, lastStep, lastResult, lastTimestamp], index) => {
+  dataOfSingleFlections.map(([currGroup, changedAt], index) => {
     const flectionId = getUUID(getFlectionKey(index + 1));
-    return { flectionId, success, failure, lastStep, lastResult, lastTimestamp };
+    return { flectionId, currGroup, changedAt };
   });
 
 const allActiveWords = [
@@ -38,11 +38,11 @@ const allActiveWords = [
     wordId: getUUID('word1'),
     learnProgress: _getLearnProgress(
       index => `verb-flection${index}`,
-      [0, 0, null, null, null],
-      [0, 0, null, null, null],
-      [0, 0, null, null, null],
-      [0, 0, null, null, null],
-      [0, 0, null, null, null]
+      [0, null],
+      [0, null],
+      [0, null],
+      [0, null],
+      [0, null]
     ),
   },
   {
@@ -51,12 +51,12 @@ const allActiveWords = [
     wordId: getUUID('word3'),
     learnProgress: _getLearnProgress(
       index => `adjective-flection${index}`,
-      [0, 0, null, null, null],
-      [0, 0, null, null, null],
-      [0, 0, null, null, null],
-      [0, 0, null, null, null],
-      [0, 0, null, null, null],
-      [0, 0, null, null, null]
+      [0, null],
+      [0, null],
+      [0, null],
+      [0, null],
+      [0, null],
+      [0, null]
     ),
   },
 ];
