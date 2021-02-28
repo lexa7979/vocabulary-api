@@ -47,15 +47,15 @@ describe('Dummy-DB API', () => {
     `);
   });
 
-  it.skip(`has a mockup with equal exports`, () => {
-    const actualExports = Object.keys(DummyDB).sort();
-    const mockupExports = Object.keys(DummyDBMockup).sort();
-    expect(actualExports).toEqual(mockupExports);
+  // it.skip(`has a mockup with equal exports`, () => {
+  //   const actualExports = Object.keys(DummyDB).sort();
+  //   const mockupExports = Object.keys(DummyDBMockup).sort();
+  //   expect(actualExports).toEqual(mockupExports);
 
-    const num1 = _getNumberOfArgumentsOfEveryFunction(DummyDB);
-    const num2 = _getNumberOfArgumentsOfEveryFunction(DummyDBMockup);
-    expect(num1).toEqual(num2);
-  });
+  //   const num1 = _getNumberOfArgumentsOfEveryFunction(DummyDB);
+  //   const num2 = _getNumberOfArgumentsOfEveryFunction(DummyDBMockup);
+  //   expect(num1).toEqual(num2);
+  // });
 });
 
 function _getNumberOfArgumentsOfEveryFunction(input) {
