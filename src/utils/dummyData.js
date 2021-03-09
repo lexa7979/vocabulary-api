@@ -1,10 +1,16 @@
 const { v4: uuid } = require('uuid');
+// eslint-disable-next-line import/no-extraneous-dependencies
+const humanizeDuration = require('humanize-duration');
+
+const { registerReplaceAction } = require('../../test');
 
 const ONE_MINUTE = 60 * 1000;
 const ONE_HOUR = 60 * ONE_MINUTE;
 const ONE_DAY = 24 * ONE_HOUR;
 
 const Global = {
+  now: new Date().getTime(),
+  // now: 1614210167345,
   idBuffer: {
     // verb: '4c67458e-e100-41cf-b603-d6d5ba43907c',
     // noun: '2f0aa94f-d30b-4c8b-b035-4438ae2cb15d',
@@ -20,44 +26,34 @@ const Global = {
 module.exports = {
   getUUID,
   findKeyOfUUID,
-  copyObjectButReplaceUUIDs,
-
   getTimestampBeforeNow,
-  copyObjectButReplaceTimestamps,
+
+  _testInternals: {
+    resetIdBuffer() {
+      Global.idBuffer = {};
+    },
+    resetGlobalNow() {
+      Global.now = new Date().getTime();
+    },
+  },
 };
 
 function getUUID(key) {
   if (Global.idBuffer[key] == null) {
+    registerReplaceAction('replaceUUIDs', _replaceIfUUID);
     Global.idBuffer[key] = uuid();
   }
   return Global.idBuffer[key];
 }
 
-function copyObjectButReplaceUUIDs(input) {
+function _replaceIfUUID(value) {
   const matchUUID = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
 
-  const _deepCopy = source => {
-    if (source == null || typeof source !== 'object') {
-      return typeof source === 'string' && matchUUID.test(source)
-        ? `(ID:${findKeyOfUUID(source)})`
-        : source;
-    }
-    if (Array.isArray(source)) {
-      return source.map(_deepCopy);
-    }
-    const obj = {};
-    Object.keys(source).forEach(key => {
-      obj[key] = _deepCopy(source[key]);
-    });
-    return obj;
-  };
-
-  if (input instanceof Promise) {
-    throw new Error("copyObjectButReplaceUUIDs failed() - won't process a Promise");
+  if (typeof value !== 'string' || !matchUUID.test(value)) {
+    return value;
   }
 
-  const result = _deepCopy(input);
-  return result;
+  return `(ID:${findKeyOfUUID(value)})`;
 }
 
 function findKeyOfUUID(id) {
@@ -75,38 +71,37 @@ function findKeyOfUUID(id) {
  * @returns {number}
  */
 function getTimestampBeforeNow({ minutes = 0, hours = 0, days = 0 }) {
-  const now = new Date().getTime();
+  registerReplaceAction('replaceTimestamps', _replaceIfTimestamp);
+  const { now } = Global;
   const result = now - minutes * ONE_MINUTE - hours * ONE_HOUR - days * ONE_DAY;
   return result;
 }
 
-/**
- * @param {*} input
- * @returns {*}
- */
-function copyObjectButReplaceTimestamps(input) {
-  const _recursion = obj => {
-    if (obj == null || typeof obj !== 'object') {
-      if (typeof obj === 'number') {
-        const now = new Date().getTime();
-        const days = Math.floor((now - obj) / ONE_DAY);
-        if (days === 0 || days === 1) {
-          return days === 0 ? '(TS:today)' : '(TS:yesterday)';
-        }
-        if (days > 1 && days <= 100) {
-          return `(TS:-${days}days)`;
-        }
-      }
-      return obj;
+function _replaceIfTimestamp(value) {
+  if (typeof value !== 'number') {
+    return value;
+  }
+
+  const { now } = Global;
+
+  const diff = Math.abs(now - value);
+  const sign = value < now ? '-' : '+';
+
+  if (diff < 101 * ONE_DAY) {
+    const text = humanizeDuration(diff, { round: true, units: ['d', 'h', 'm'] });
+    if (text.startsWith('0 ')) {
+      return '(TS:now)';
     }
-    if (Array.isArray(obj)) {
-      return obj.map(_recursion);
+    if (text === '1 day') {
+      return sign === '-' ? '(TS:yesterday)' : '(TS:tomorrow)';
     }
-    const result = {};
-    Object.keys(obj).forEach(key => {
-      result[key] = _recursion(obj[key]);
-    });
-    return result;
-  };
-  return _recursion(input);
+    const short = text
+      .replace(/ minutes?/, 'min')
+      .replace(/ hours?/, 'h')
+      .replace(/ days?/, 'd')
+      .replace(/, /g, ' ');
+    return `(TS:${sign}${short})`;
+  }
+
+  return value;
 }

@@ -1,8 +1,16 @@
-const { getUUID, copyObjectButReplaceUUIDs } = require('../../utils/dummyData');
+const { getUUID } = require('../../utils/dummyData');
 
 const Words = require('./words');
 
-const { ASYNC, bold, EXPECTS, IS_ACCESSIBLE, REJECTS, RESOLVES } = require('../../../test');
+const {
+  ASYNC,
+  bold,
+  EXPECTS,
+  IS_ACCESSIBLE,
+  REJECTS,
+  RESOLVES,
+  copyObject,
+} = require('../../../test');
 
 const Global = {};
 
@@ -41,7 +49,7 @@ function runTestsAboutGetWord() {
     it(`- when used with valid ID - ${RESOLVES} as expected ${_nextSnapshotHint()}`, async () => {
       const result = await getWord(getUUID('word1'));
 
-      const copy = copyObjectButReplaceUUIDs(result);
+      const copy = copyObject(result, { replaceUUIDs: true });
       expect(copy).toMatchSnapshot(`> word1 <`);
     });
 
@@ -66,7 +74,7 @@ function runTestsAboutGetWordWithTranslations() {
     it(`- when used with valid ID - ${RESOLVES} as expected ${_nextSnapshotHint()}`, async () => {
       const result = await getWordWithTranslations(getUUID('word2'));
 
-      const copy = copyObjectButReplaceUUIDs(result);
+      const copy = copyObject(result, { replaceUUIDs: true });
       expect(copy).toMatchSnapshot(`> word2 + translations <`);
     });
 
@@ -86,14 +94,14 @@ function runTestsAboutListAllWords() {
     it(`- when used w/o arguments - ${RESOLVES} as expected ${_nextSnapshotHint()}`, async () => {
       const result = await listAllWords();
 
-      const copy = copyObjectButReplaceUUIDs(result);
+      const copy = copyObject(result, { replaceUUIDs: true });
       expect(copy).toMatchSnapshot(`> all words <`);
     });
 
     it(`- when used with argument "first" - ${RESOLVES} as expected`, async () => {
       const result = await listAllWords(4, undefined);
 
-      const copy = copyObjectButReplaceUUIDs(result);
+      const copy = copyObject(result, { replaceUUIDs: true });
       expect(copy.map(({ id }) => id)).toMatchInlineSnapshot(`
         Array [
           "(ID:word1)",
@@ -107,7 +115,7 @@ function runTestsAboutListAllWords() {
     it(`- when used with argument "offset" - ${RESOLVES} as expected`, async () => {
       const result = await listAllWords(undefined, 8);
 
-      const copy = copyObjectButReplaceUUIDs(result);
+      const copy = copyObject(result, { replaceUUIDs: true });
       expect(copy.map(({ id }) => id)).toMatchInlineSnapshot(`
         Array [
           "(ID:word9)",
@@ -134,7 +142,7 @@ function runTestsAboutGetTranslation() {
     it(`- when used with valid ID - ${RESOLVES} as expected ${_nextSnapshotHint()}`, async () => {
       const result = await getTranslation(getUUID('word1-translation1'));
 
-      const copy = copyObjectButReplaceUUIDs(result);
+      const copy = copyObject(result, { replaceUUIDs: true });
       expect(copy).toMatchSnapshot(`> 1st translation of word1 <`);
     });
 
@@ -159,14 +167,14 @@ function runTestsAboutListAllTranslationsOfWord() {
     it(`- when used with valid ID - ${RESOLVES} as expected ${_nextSnapshotHint()}`, async () => {
       const results = await listAllTranslationsOfWord(getUUID('word1'));
 
-      const copy = copyObjectButReplaceUUIDs(results);
+      const copy = copyObject(results, { replaceUUIDs: true });
       expect(copy).toMatchSnapshot(`> all translations of word1 <`);
     });
 
     it(`- when used with valid ID and argument "first" - ${RESOLVES} as expected`, async () => {
       const result = await listAllTranslationsOfWord(getUUID('word1'), 3, undefined);
 
-      const copy = copyObjectButReplaceUUIDs(result);
+      const copy = copyObject(result, { replaceUUIDs: true });
       expect(copy.map(({ id }) => id)).toMatchInlineSnapshot(`
         Array [
           "(ID:word1-translation1)",
@@ -179,7 +187,7 @@ function runTestsAboutListAllTranslationsOfWord() {
     it(`- when used with valid ID and argument "offset" - ${RESOLVES} as expected`, async () => {
       const result = await listAllTranslationsOfWord(getUUID('word1'), undefined, 3);
 
-      const copy = copyObjectButReplaceUUIDs(result);
+      const copy = copyObject(result, { replaceUUIDs: true });
       expect(copy.map(({ id }) => id)).toMatchInlineSnapshot(`
         Array [
           "(ID:word1-translation4)",

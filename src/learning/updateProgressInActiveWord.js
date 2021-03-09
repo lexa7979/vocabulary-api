@@ -1,5 +1,3 @@
-const { getNamedType } = require('graphql');
-
 module.exports = updateProgressInActiveWord;
 
 /**

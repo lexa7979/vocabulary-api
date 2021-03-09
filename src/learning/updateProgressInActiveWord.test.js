@@ -1,19 +1,12 @@
 const { detailedDiff } = require('deep-object-diff');
 
-const {
-  getUUID,
-  copyObjectButReplaceUUIDs,
-  getTimestampBeforeNow,
-  copyObjectButReplaceTimestamps,
-} = require('../utils/dummyData');
+const { getUUID, getTimestampBeforeNow } = require('../utils/dummyData');
 
 const updateProgressInActiveWord = require('./updateProgressInActiveWord');
 
-const { bold, EXPECTS, FAILS, IS_ACCESSIBLE, RETURNS, WORKS } = require('../../test');
+const { bold, EXPECTS, FAILS, IS_ACCESSIBLE, RETURNS, WORKS, copyObject } = require('../../test');
 
-function _copy(obj) {
-  return copyObjectButReplaceUUIDs(copyObjectButReplaceTimestamps(obj));
-}
+const _copy = input => copyObject(input, { replaceUUIDs: true, replaceTimestamps: true });
 
 describe(`Learning utility function ${bold('updateProgressInActiveWord()')}`, () => {
   it(IS_ACCESSIBLE, () => expect(updateProgressInActiveWord).toBeFunction());
@@ -35,7 +28,7 @@ describe(`Learning utility function ${bold('updateProgressInActiveWord()')}`, ()
         "added": Object {
           "learnProgress": Object {
             "3": Object {
-              "changedAt": "(TS:today)",
+              "changedAt": "(TS:now)",
               "currGroup": 1,
               "flectionId": "(ID:verb-flection2)",
             },
@@ -90,7 +83,7 @@ describe(`Learning utility function ${bold('updateProgressInActiveWord()')}`, ()
         {
           flectionId: '(ID:verb-flection2)',
           currGroup: newGroup,
-          changedAt: '(TS:today)',
+          changedAt: '(TS:now)',
         },
       ]);
     }
@@ -121,7 +114,7 @@ describe(`Learning utility function ${bold('updateProgressInActiveWord()')}`, ()
         {
           flectionId: '(ID:verb-flection2)',
           currGroup: newGroup,
-          changedAt: '(TS:today)',
+          changedAt: '(TS:now)',
         },
       ]);
     }

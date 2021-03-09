@@ -1,9 +1,9 @@
 const db = require('../../dummy-db');
-const { getUUID, copyObjectButReplaceUUIDs } = require('../../utils/dummyData');
+const { getUUID } = require('../../utils/dummyData');
 
 const { resolvers } = require('./Word');
 
-const { bold, RESOLVES, ASYNC, IS_ACCESSIBLE, EXPECTS } = require('../../../test');
+const { bold, RESOLVES, ASYNC, IS_ACCESSIBLE, EXPECTS, copyObject } = require('../../../test');
 
 const context = { db };
 
@@ -51,7 +51,7 @@ function runTestsAboutQueryWithWord() {
 
       const result = await word(parent, args, context);
 
-      const copy = copyObjectButReplaceUUIDs(result);
+      const copy = copyObject(result, { replaceUUIDs: true });
       expect(copy).toMatchInlineSnapshot(`
         Object {
           "id": "(ID:word3)",
@@ -75,7 +75,7 @@ function runTestsAboutQueryWithWords() {
 
       const result = await words(parent, args, context);
 
-      const copy = copyObjectButReplaceUUIDs(result);
+      const copy = copyObject(result, { replaceUUIDs: true });
       expect(copy).toMatchInlineSnapshot(`
         Array [
           Object {
@@ -105,7 +105,7 @@ function runTestsAboutWordWithWordClass() {
 
       const result = await wordClass(parent, args, context);
 
-      const copy = copyObjectButReplaceUUIDs(result);
+      const copy = copyObject(result, { replaceUUIDs: true });
       expect(copy).toMatchInlineSnapshot(`
         Object {
           "id": "(ID:verb)",
@@ -131,7 +131,7 @@ function runTestsAboutWordWithTranslations() {
 
       const result = await translations(parent, args, context);
 
-      const copy = copyObjectButReplaceUUIDs(result);
+      const copy = copyObject(result, { replaceUUIDs: true });
       expect(copy).toMatchInlineSnapshot(`
         Array [
           Object {
@@ -170,7 +170,7 @@ function runTestsAboutTranslationWithFlection() {
 
       const result = await flection(parent, args, context);
 
-      const copy = copyObjectButReplaceUUIDs(result);
+      const copy = copyObject(result, { replaceUUIDs: true });
       expect(copy).toMatchInlineSnapshot(`
         Object {
           "id": "(ID:verb-flection2)",
@@ -196,7 +196,7 @@ function runTestsAboutTranslationWithWord() {
 
       const result = await word(parent, args, context);
 
-      const copy = copyObjectButReplaceUUIDs(result);
+      const copy = copyObject(result, { replaceUUIDs: true });
       expect(copy).toMatchInlineSnapshot(`
         Object {
           "id": "(ID:word1)",

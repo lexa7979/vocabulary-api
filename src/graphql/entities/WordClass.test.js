@@ -1,9 +1,9 @@
 const db = require('../../dummy-db');
-const { getUUID, copyObjectButReplaceUUIDs } = require('../../utils/dummyData');
+const { getUUID } = require('../../utils/dummyData');
 
 const { resolvers } = require('./WordClass');
 
-const { bold, RESOLVES, ASYNC, IS_ACCESSIBLE, EXPECTS } = require('../../../test');
+const { bold, RESOLVES, ASYNC, IS_ACCESSIBLE, EXPECTS, copyObject } = require('../../../test');
 
 const context = { db };
 
@@ -48,7 +48,7 @@ function runTestsAboutQueryWithWordClass() {
 
       const result = await wordClass(parent, args, context);
 
-      const copy = copyObjectButReplaceUUIDs(result);
+      const copy = copyObject(result, { replaceUUIDs: true });
       expect(copy).toMatchInlineSnapshot(`
         Object {
           "id": "(ID:noun)",
@@ -74,7 +74,7 @@ function runTestsAboutQueryWithWordClasses() {
 
       const result = await wordClasses(parent, args, context);
 
-      const copy = copyObjectButReplaceUUIDs(result);
+      const copy = copyObject(result, { replaceUUIDs: true });
       expect(copy).toMatchInlineSnapshot(`
         Array [
           Object {
@@ -106,7 +106,7 @@ function runTestsAboutWordClassWithFlections() {
 
       const result = await flections(parent, args, context);
 
-      const copy = copyObjectButReplaceUUIDs(result);
+      const copy = copyObject(result, { replaceUUIDs: true });
       expect(copy).toMatchInlineSnapshot(`
         Array [
           Object {
@@ -135,7 +135,7 @@ function runTestsAboutFlectionWithWordClass() {
 
       const result = await wordClass(parent, args, context);
 
-      const copy = copyObjectButReplaceUUIDs(result);
+      const copy = copyObject(result, { replaceUUIDs: true });
       expect(copy).toMatchInlineSnapshot(`
         Object {
           "id": "(ID:noun)",

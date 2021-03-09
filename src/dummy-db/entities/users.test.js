@@ -1,8 +1,16 @@
-const { getUUID, copyObjectButReplaceUUIDs } = require('../../utils/dummyData');
+const { getUUID } = require('../../utils/dummyData');
 
 const Users = require('./users');
 
-const { ASYNC, bold, EXPECTS, IS_ACCESSIBLE, REJECTS, RESOLVES } = require('../../../test');
+const {
+  ASYNC,
+  bold,
+  EXPECTS,
+  IS_ACCESSIBLE,
+  REJECTS,
+  RESOLVES,
+  copyObject,
+} = require('../../../test');
 
 const Global = {};
 
@@ -36,7 +44,7 @@ function runTestsAboutGetUser() {
     it(`- when used with valid ID - ${RESOLVES} as expected ${_nextSnapshotHint()}`, async () => {
       const result = await getUser(getUUID('user1'));
 
-      const copy = copyObjectButReplaceUUIDs(result);
+      const copy = copyObject(result, { replaceUUIDs: true });
       expect(copy).toMatchSnapshot(`> user1 <`);
     });
 
@@ -57,14 +65,14 @@ function runTestsAboutListAllUsers() {
     it(`- when used w/o arguments - ${RESOLVES} as expected ${_nextSnapshotHint()}`, async () => {
       const result = await listAllUsers();
 
-      const copy = copyObjectButReplaceUUIDs(result);
+      const copy = copyObject(result, { replaceUUIDs: true });
       expect(copy).toMatchSnapshot(`> all users <`);
     });
 
     it(`- when used with argument "first" - ${RESOLVES} as expected`, async () => {
       const result = await listAllUsers(1, undefined);
 
-      const copy = copyObjectButReplaceUUIDs(result);
+      const copy = copyObject(result, { replaceUUIDs: true });
       expect(copy.map(({ id }) => id)).toMatchInlineSnapshot(`
         Array [
           "(ID:user1)",
@@ -75,7 +83,7 @@ function runTestsAboutListAllUsers() {
     it(`- when used with argument "offset" - ${RESOLVES} as expected`, async () => {
       const result = await listAllUsers(undefined, 1);
 
-      const copy = copyObjectButReplaceUUIDs(result);
+      const copy = copyObject(result, { replaceUUIDs: true });
       expect(copy.map(({ id }) => id)).toMatchInlineSnapshot(`
         Array [
           "(ID:user2)",
@@ -96,7 +104,7 @@ function runTestsAboutGetActiveWord() {
     it(`- when used with valid ID - ${RESOLVES} as expected ${_nextSnapshotHint()}`, async () => {
       const result = await getActiveWord(getUUID('user1-activeWord1'));
 
-      const copy = copyObjectButReplaceUUIDs(result);
+      const copy = copyObject(result, { replaceUUIDs: true });
       expect(copy).toMatchSnapshot(`> 1st activeWord of user1 <`);
     });
 
@@ -125,7 +133,7 @@ function runTestsAboutListAllActiveWordsOfUser() {
       const result1 = await listAllActiveWordsOfUser(getUUID('user1'));
       expect(result1).toBeArrayOfSize(2);
 
-      const copy = copyObjectButReplaceUUIDs(result1);
+      const copy = copyObject(result1, { replaceUUIDs: true });
       expect(copy).toMatchSnapshot(`> all active-words of user1 <`);
 
       const result2 = await listAllActiveWordsOfUser(getUUID('user2'));
@@ -135,7 +143,7 @@ function runTestsAboutListAllActiveWordsOfUser() {
     it(`- when used with valid ID and argument "first" - ${RESOLVES} as expected`, async () => {
       const result = await listAllActiveWordsOfUser(getUUID('user1'), 1, undefined);
 
-      const copy = copyObjectButReplaceUUIDs(result);
+      const copy = copyObject(result, { replaceUUIDs: true });
       expect(copy.map(({ id }) => id)).toMatchInlineSnapshot(`
         Array [
           "(ID:user1-activeWord1)",
@@ -146,7 +154,7 @@ function runTestsAboutListAllActiveWordsOfUser() {
     it(`- when used with valid ID and argument "offset" - ${RESOLVES} as expected`, async () => {
       const result = await listAllActiveWordsOfUser(getUUID('user1'), undefined, 1);
 
-      const copy = copyObjectButReplaceUUIDs(result);
+      const copy = copyObject(result, { replaceUUIDs: true });
       expect(copy.map(({ id }) => id)).toMatchInlineSnapshot(`
         Array [
           "(ID:user1-activeWord2)",

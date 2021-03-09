@@ -1,12 +1,12 @@
 const db = require('../../dummy-db');
 
-const { getUUID, copyObjectButReplaceUUIDs } = require('../../utils/dummyData');
+const { getUUID } = require('../../utils/dummyData');
 
 const { resolvers } = require('./User');
 
 const context = { db };
 
-const { ASYNC, bold, EXPECTS, IS_ACCESSIBLE, RESOLVES } = require('../../../test');
+const { ASYNC, bold, EXPECTS, IS_ACCESSIBLE, RESOLVES, copyObject } = require('../../../test');
 
 describe(`GraphQL entity ${bold('User')}`, () => {
   it(`has the expected resolvers`, () => {
@@ -43,7 +43,7 @@ function runTestsAboutQueryWithUser() {
 
       const result = await user(parent, args, context);
 
-      const copy = copyObjectButReplaceUUIDs(result);
+      const copy = copyObject(result, { replaceUUIDs: true });
       expect(copy).toMatchInlineSnapshot(`
         Object {
           "currStep": 8,
@@ -70,7 +70,7 @@ function runTestsAboutQueryWithUsers() {
 
       const result = await users(parent, args, context);
 
-      const copy = copyObjectButReplaceUUIDs(result);
+      const copy = copyObject(result, { replaceUUIDs: true });
       expect(copy).toMatchInlineSnapshot(`
         Array [
           Object {
@@ -99,7 +99,7 @@ function runTestsAboutUserWithActiveWords() {
 
       const result = await activeWords(parent, args, context);
 
-      const copy = copyObjectButReplaceUUIDs(result);
+      const copy = copyObject(result, { replaceUUIDs: true });
       expect(copy).toMatchInlineSnapshot(`
         Array [
           Object {
