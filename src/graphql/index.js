@@ -1,4 +1,5 @@
-const { ApolloServer, mergeSchemas } = require('apollo-server');
+const { ApolloServer } = require('apollo-server');
+const { makeExecutableSchema } = require('@graphql-tools/schema');
 
 const { allTypeDefs, allResolvers } = require('./entities');
 
@@ -9,8 +10,8 @@ module.exports = {
 };
 
 async function init() {
-  const schema = mergeSchemas({
-    schemas: Object.values(allTypeDefs),
+  const schema = makeExecutableSchema({
+    typeDefs: Object.values(allTypeDefs),
     resolvers: Object.values(allResolvers),
   });
 

@@ -8,9 +8,6 @@
     "start:win": "start http://localhost:4001 && nodemon",
     "start:mac": "open http://localhost:4001 && nodemon",
     "test": "jest --passWithNoTests",
-    "test:update": "jest -u",
-    "test:watch": "jest --watch --passWithNoTests",
-    "test:watch-update": "jest --watch -u",
     "test:u": "jest -u",
     "test:w": "jest --watch --passWithNoTests",
     "test:wu": "jest --watch -u",
@@ -23,28 +20,29 @@
     "graphql",
     "mongodb"
   ],
-  "author": "Alexander Urban <lexa79@protonmail.com>",
+  "author": "Alexander Urban <lexa79@pm.me>",
   "license": "MIT",
   "dependencies": {
-    "apollo-server": "^2.19.2",
-    "graphql": "^15.5.0",
+    "@graphql-tools/schema": "^8.5.0",
+    "apollo-server": "^3.10.0",
+    "graphql": "^16.5.0",
     "graphql-type-uuid": "^0.2.0",
     "uuid": "^8.3.2"
   },
   "devDependencies": {
-    "@types/jest": "^26.0.20",
-    "deep-object-diff": "^1.1.0",
-    "eslint": "^7.19.0",
-    "eslint-config-airbnb-base": "^14.2.1",
-    "eslint-config-prettier": "^7.2.0",
-    "eslint-plugin-import": "^2.22.1",
-    "eslint-plugin-jest": "^24.1.3",
-    "humanize-duration": "^3.25.1",
-    "jest": "^26.6.3",
-    "jest-extended": "^0.11.5",
-    "nock": "^13.0.7",
-    "nodemon": "^2.0.7",
-    "prettier": "^2.2.1",
+    "@types/jest": "^28.1.6",
+    "deep-object-diff": "^1.1.7",
+    "eslint": "^8.20.0",
+    "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-plugin-import": "^2.26.0",
+    "eslint-plugin-jest": "^26.6.0",
+    "humanize-duration": "^3.27.2",
+    "jest": "^28.1.3",
+    "jest-extended": "^3.0.1",
+    "nock": "^13.2.8",
+    "nodemon": "^2.0.19",
+    "prettier": "^2.7.1",
     "seedrandom": "^3.0.5"
   },
   "nodemonConfig": {
@@ -80,7 +78,7 @@
   "jest": {
     "clearMocks": true,
     "setupFilesAfterEnv": [
-      "jest-extended"
+      "jest-extended/all"
     ],
     "verbose": true,
     "testEnvironment": "node"

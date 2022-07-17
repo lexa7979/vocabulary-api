@@ -121,7 +121,7 @@ function runTestsAboutGetTimestampBeforeNow() {
     it(`${EXPECTS} one argument (inputBag)`, () => expect(getTimestampBeforeNow).toHaveLength(1));
 
     it(`- when used w/o arguments - ${FAILS} as expected`, () => {
-      expect(getTimestampBeforeNow).toThrow('Cannot read property');
+      expect(getTimestampBeforeNow).toThrow('Cannot read prop');
     });
 
     it(`- when used with "minutes" in inputBag - ${RETURNS} a timestamp as number`, () => {
