@@ -1,86 +1,88 @@
 {
-  "name": "vocabulary-api",
-  "version": "1.0.0",
-  "description": "Backend for my own vocabulary training app, based on MongoDB and GraphQL",
-  "main": "src/index.js",
-  "scripts": {
-    "start": "nodemon",
-    "start:win": "start http://localhost:4001 && nodemon",
-    "start:mac": "open http://localhost:4001 && nodemon",
-    "test": "jest --passWithNoTests",
-    "test:u": "jest -u",
-    "test:w": "jest --watch --passWithNoTests",
-    "test:wu": "jest --watch -u",
-    "test:coverage": "jest --coverage"
-  },
-  "keywords": [
-    "vocabulary",
-    "learning",
-    "api",
-    "graphql",
-    "mongodb"
-  ],
-  "author": "Alexander Urban <lexa79@pm.me>",
-  "license": "MIT",
-  "dependencies": {
-    "@graphql-tools/schema": "^8.5.0",
-    "apollo-server": "^3.10.0",
-    "graphql": "^16.5.0",
-    "graphql-type-uuid": "^0.2.0",
-    "uuid": "^8.3.2"
-  },
-  "devDependencies": {
-    "@types/jest": "^28.1.6",
-    "deep-object-diff": "^1.1.7",
-    "eslint": "^8.20.0",
-    "eslint-config-airbnb-base": "^15.0.0",
-    "eslint-config-prettier": "^8.5.0",
-    "eslint-plugin-import": "^2.26.0",
-    "eslint-plugin-jest": "^26.6.0",
-    "humanize-duration": "^3.27.2",
-    "jest": "^28.1.3",
-    "jest-extended": "^3.0.1",
-    "nock": "^13.2.8",
-    "nodemon": "^2.0.19",
-    "prettier": "^2.7.1",
-    "seedrandom": "^3.0.5"
-  },
-  "nodemonConfig": {
-    "ext": "js,json,graphql"
-  },
-  "eslintConfig": {
-    "env": {
-      "node": true,
-      "jest": true
+    "name": "vocabulary-api",
+    "version": "1.0.0",
+    "description": "Backend for my own vocabulary training app, based on MongoDB and GraphQL",
+    "main": "src/index.js",
+    "scripts": {
+        "start": "nodemon",
+        "start:win": "start http://localhost:4001 && nodemon",
+        "start:mac": "open http://localhost:4001 && nodemon",
+        "test": "jest --passWithNoTests",
+        "test:u": "jest -u",
+        "test:w": "jest --watch --passWithNoTests",
+        "test:wu": "jest --watch -u",
+        "test:coverage": "jest --coverage"
     },
-    "extends": [
-      "airbnb-base",
-      "prettier"
+    "keywords": [
+        "vocabulary",
+        "learning",
+        "api",
+        "graphql",
+        "mongodb"
     ],
-    "plugins": [
-      "jest"
-    ],
-    "rules": {
-      "no-use-before-define": [
-        "error",
-        "nofunc"
-      ],
-      "no-underscore-dangle": "off"
+    "author": "Alexander Urban <lexa79@pm.me>",
+    "license": "MIT",
+    "dependencies": {
+        "@apollo/server": "^4.11.2",
+        "@graphql-tools/schema": "^10.0.14",
+        "graphql": "^16.10.0",
+        "graphql-type-uuid": "^0.2.0",
+        "uuid": "^11.0.3"
+    },
+    "devDependencies": {
+        "@types/jest": "^29.5.14",
+        "deep-object-diff": "^1.1.9",
+        "eslint": "^8.57.1",
+        "eslint-config-airbnb-base": "^15.0.0",
+        "eslint-config-prettier": "^9.1.0",
+        "eslint-plugin-import": "^2.31.0",
+        "eslint-plugin-jest": "^28.10.0",
+        "humanize-duration": "^3.32.1",
+        "jest": "^29.7.0",
+        "jest-extended": "^4.0.2",
+        "nock": "^13.5.6",
+        "nodemon": "^3.1.9",
+        "prettier": "^3.4.2",
+        "seedrandom": "^3.0.5"
+    },
+    "nodemonConfig": {
+        "ext": "js,json,graphql"
+    },
+    "eslintConfig": {
+        "env": {
+            "node": true,
+            "jest": true
+        },
+        "extends": [
+            "airbnb-base",
+            "prettier"
+        ],
+        "plugins": [
+            "jest"
+        ],
+        "rules": {
+            "no-use-before-define": [
+                "error",
+                "nofunc"
+            ],
+            "no-underscore-dangle": "off"
+        }
+    },
+    "prettier": {
+        "singleQuote": true,
+        "trailingComma": "es5",
+        "useTabs": false,
+        "tabWidth": 4,
+        "printWidth": 120,
+        "arrowParens": "avoid"
+    },
+    "jest": {
+        "clearMocks": true,
+        "setupFilesAfterEnv": [
+            "jest-extended/all"
+        ],
+        "verbose": true,
+        "testEnvironment": "node",
+        "prettierPath": null
     }
-  },
-  "prettier": {
-    "singleQuote": true,
-    "trailingComma": "es5",
-    "useTabs": false,
-    "printWidth": 100,
-    "arrowParens": "avoid"
-  },
-  "jest": {
-    "clearMocks": true,
-    "setupFilesAfterEnv": [
-      "jest-extended/all"
-    ],
-    "verbose": true,
-    "testEnvironment": "node"
-  }
 }

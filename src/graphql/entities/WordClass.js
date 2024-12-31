@@ -1,55 +1,55 @@
-const { gql } = require('apollo-server');
+/* eslint-disable camelcase */
 
 module.exports = {
-  typeDefs: getTypeDefs(),
-  resolvers: getResolvers(),
+    typeDefs: getTypeDefs(),
+    resolvers: getResolvers(),
 };
 
 /**
  * @returns {object}
  */
 function getTypeDefs() {
-  return gql`
-    type Query {
-      wordClass(id: UUID): WordClass
-      wordClasses(first: Int = 0, offset: Int = 0): [WordClass!]!
-    }
+    return `#graphql
+        type Query {
+            wordClass(id: UUID): WordClass
+            wordClasses(first: Int = 0, offset: Int = 0): [WordClass!]!
+        }
 
-    type WordClass {
-      id: UUID!
-      name_de: String
+        type WordClass {
+            id: UUID!
+            name_de: String
 
-      flections(first: Int = 0, offset: Int = 0): [Flection!]!
-    }
+            flections(first: Int = 0, offset: Int = 0): [Flection!]!
+        }
 
-    type Flection {
-      id: UUID!
-      name_de: String
-      pos: Int
+        type Flection {
+            id: UUID!
+            name_de: String
+            pos: Int
 
-      wordClass: WordClass!
-    }
-  `;
+            wordClass: WordClass!
+        }
+    `;
 }
 
 /**
  * @returns {object}
  */
 function getResolvers() {
-  return {
-    Query: {
-      wordClass,
-      wordClasses,
-    },
+    return {
+        Query: {
+            wordClass,
+            wordClasses,
+        },
 
-    WordClass: {
-      flections: flectionsOfWordClass,
-    },
+        WordClass: {
+            flections: flectionsOfWordClass,
+        },
 
-    Flection: {
-      wordClass: wordClassOfFlection,
-    },
-  };
+        Flection: {
+            wordClass: wordClassOfFlection,
+        },
+    };
 }
 
 /**
@@ -61,12 +61,11 @@ function getResolvers() {
  * @returns {Promise<object>}
  */
 async function wordClass(parent, { id }, { db }) {
-  // eslint-disable-next-line camelcase
-  const { name_de } = await db.getWordClass(id);
-  return {
-    id,
-    name_de,
-  };
+    const { name_de } = await db.getWordClass(id);
+    return {
+        id,
+        name_de,
+    };
 }
 
 /**
@@ -78,13 +77,12 @@ async function wordClass(parent, { id }, { db }) {
  * @returns {Promise<object[]>}
  */
 async function wordClasses(parent, { first, offset }, { db }) {
-  const list = await db.listAllWordClasses(first, offset);
-  // eslint-disable-next-line camelcase
-  const results = list.map(({ id, name_de }) => ({
-    id,
-    name_de,
-  }));
-  return results;
+    const list = await db.listAllWordClasses(first, offset);
+    const results = list.map(({ id, name_de }) => ({
+        id,
+        name_de,
+    }));
+    return results;
 }
 
 /**
@@ -96,14 +94,13 @@ async function wordClasses(parent, { first, offset }, { db }) {
  * @returns {Promise<object[]>}
  */
 async function flectionsOfWordClass({ id: classId }, { first, offset }, { db }) {
-  const list = await db.listAllFlectionsOfWordClass(classId, first, offset);
-  // eslint-disable-next-line camelcase
-  const results = list.map(({ id, name_de, pos }) => ({
-    id,
-    name_de,
-    pos,
-  }));
-  return results;
+    const list = await db.listAllFlectionsOfWordClass(classId, first, offset);
+    const results = list.map(({ id, name_de, pos }) => ({
+        id,
+        name_de,
+        pos,
+    }));
+    return results;
 }
 
 /**
@@ -115,11 +112,10 @@ async function flectionsOfWordClass({ id: classId }, { first, offset }, { db }) 
  * @returns {Promise<object>}
  */
 async function wordClassOfFlection({ id: flectionId }, args, { db }) {
-  const { classId: id } = await db.getFlection(flectionId);
-  // eslint-disable-next-line camelcase
-  const { name_de } = await db.getWordClass(id);
-  return {
-    id,
-    name_de,
-  };
+    const { classId: id } = await db.getFlection(flectionId);
+    const { name_de } = await db.getWordClass(id);
+    return {
+        id,
+        name_de,
+    };
 }

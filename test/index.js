@@ -2,8 +2,8 @@ const Colors = require('./colors');
 const Copy = require('./copy');
 
 module.exports = {
-  ...Colors,
-  ...Copy,
+    ...Colors,
+    ...Copy,
 
-  _testInternals: undefined,
+    _testInternals: undefined,
 };

@@ -1,58 +1,55 @@
-const { gql } = require('apollo-server');
+/* eslint-disable camelcase */
 
 module.exports = {
-  typeDefs: getTypeDefs(),
-  resolvers: getResolvers(),
+    typeDefs: getTypeDefs(),
+    resolvers: getResolvers(),
 };
 
-/**
- * @returns {object}
- */
 function getTypeDefs() {
-  return gql`
-    type Query {
-      word(id: UUID): Word
-      words(first: Int = 0, offset: Int = 0): [Word!]!
-    }
+    return `#graphql
+        type Query {
+            word(id: UUID): Word
+            words(first: Int = 0, offset: Int = 0): [Word!]!
+        }
 
-    type Word {
-      id: UUID!
+        type Word {
+            id: UUID!
 
-      wordClass: WordClass
-      translations(first: Int = 0, offset: Int = 0): [Translation!]!
-    }
+            wordClass: WordClass
+            translations(first: Int = 0, offset: Int = 0): [Translation!]!
+        }
 
-    type Translation {
-      id: UUID!
-      text_de: String!
-      text_sv: String!
+        type Translation {
+            id: UUID!
+            text_de: String!
+            text_sv: String!
 
-      flection: Flection
-      word: Word!
-    }
-  `;
+            flection: Flection
+            word: Word!
+        }
+    `;
 }
 
 /**
  * @returns {object}
  */
 function getResolvers() {
-  return {
-    Query: {
-      word,
-      words,
-    },
+    return {
+        Query: {
+            word,
+            words,
+        },
 
-    Word: {
-      wordClass: wordClassOfWord,
-      translations: translationsOfWord,
-    },
+        Word: {
+            wordClass: wordClassOfWord,
+            translations: translationsOfWord,
+        },
 
-    Translation: {
-      flection: flectionOfTranslation,
-      word: wordOfTranslation,
-    },
-  };
+        Translation: {
+            flection: flectionOfTranslation,
+            word: wordOfTranslation,
+        },
+    };
 }
 
 /**
@@ -64,10 +61,10 @@ function getResolvers() {
  * @returns {Promise<object>}
  */
 async function word(parent, { id }, { db }) {
-  await db.getWord(id);
-  return {
-    id,
-  };
+    await db.getWord(id);
+    return {
+        id,
+    };
 }
 
 /**
@@ -79,11 +76,11 @@ async function word(parent, { id }, { db }) {
  * @returns {Promise<object[]>}
  */
 async function words(parent, { first, offset }, { db }) {
-  const list = await db.listAllWords(first, offset);
-  const results = list.map(({ id }) => ({
-    id,
-  }));
-  return results;
+    const list = await db.listAllWords(first, offset);
+    const results = list.map(({ id }) => ({
+        id,
+    }));
+    return results;
 }
 
 /**
@@ -95,13 +92,12 @@ async function words(parent, { first, offset }, { db }) {
  * @returns {Promise<object>}
  */
 async function wordClassOfWord({ id: wordId }, args, { db }) {
-  const { classId: id } = await db.getWord(wordId);
-  // eslint-disable-next-line camelcase
-  const { name_de } = await db.getWordClass(id);
-  return {
-    id,
-    name_de,
-  };
+    const { classId: id } = await db.getWord(wordId);
+    const { name_de } = await db.getWordClass(id);
+    return {
+        id,
+        name_de,
+    };
 }
 
 /**
@@ -113,14 +109,13 @@ async function wordClassOfWord({ id: wordId }, args, { db }) {
  * @returns {Promise<object[]>}
  */
 async function translationsOfWord({ id: wordId }, { first, offset }, { db }) {
-  const list = await db.listAllTranslationsOfWord(wordId, first, offset);
-  // eslint-disable-next-line camelcase
-  const results = list.map(({ id, text_de, text_sv }) => ({
-    id,
-    text_de,
-    text_sv,
-  }));
-  return results;
+    const list = await db.listAllTranslationsOfWord(wordId, first, offset);
+    const results = list.map(({ id, text_de, text_sv }) => ({
+        id,
+        text_de,
+        text_sv,
+    }));
+    return results;
 }
 
 /**
@@ -132,14 +127,13 @@ async function translationsOfWord({ id: wordId }, { first, offset }, { db }) {
  * @returns {Promise<object>}
  */
 async function flectionOfTranslation({ id: translationId }, args, { db }) {
-  const { flectionId: id } = await db.getTranslation(translationId);
-  // eslint-disable-next-line camelcase
-  const { name_de, pos } = await db.getFlection(id);
-  return {
-    id,
-    name_de,
-    pos,
-  };
+    const { flectionId: id } = await db.getTranslation(translationId);
+    const { name_de, pos } = await db.getFlection(id);
+    return {
+        id,
+        name_de,
+        pos,
+    };
 }
 
 /**
@@ -151,9 +145,9 @@ async function flectionOfTranslation({ id: translationId }, args, { db }) {
  * @returns {Promise<object>}
  */
 async function wordOfTranslation({ id: translationId }, args, { db }) {
-  const { wordId: id } = await db.getTranslation(translationId);
-  await db.getWord(id);
-  return {
-    id,
-  };
+    const { wordId: id } = await db.getTranslation(translationId);
+    await db.getWord(id);
+    return {
+        id,
+    };
 }

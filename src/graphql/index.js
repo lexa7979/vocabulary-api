@@ -1,25 +1,25 @@
-const { ApolloServer } = require('apollo-server');
-const { makeExecutableSchema } = require('@graphql-tools/schema');
+/* eslint-disable import/prefer-default-export */
+
+const { ApolloServer } = require('@apollo/server');
+const { startStandaloneServer } = require('@apollo/server/standalone');
 
 const { allTypeDefs, allResolvers } = require('./entities');
 
 const DataService = require('../dummy-db');
 
-module.exports = {
-  init,
-};
-
 async function init() {
-  const schema = makeExecutableSchema({
-    typeDefs: Object.values(allTypeDefs),
-    resolvers: Object.values(allResolvers),
-  });
+    const typeDefs = Object.values(allTypeDefs);
+    const resolvers = Object.values(allResolvers);
 
-  const context = { db: DataService };
+    const context = async () => ({ db: DataService });
 
-  const server = new ApolloServer({ schema, context });
+    const server = new ApolloServer({ typeDefs, resolvers });
 
-  const { url } = await server.listen({ port: 4001 });
+    const { url } = await startStandaloneServer(server, { context, listen: { port: 4001 } });
 
-  return { server, url };
+    return { server, url };
 }
+
+module.exports = {
+    init,
+};

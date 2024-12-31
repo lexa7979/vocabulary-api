@@ -1,39 +1,39 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Test-data service "words" (1) has an [1;37masync[0m function [1;37mgetWord()[0m which - when used with valid ID - [0;32mresolves[0m as expected [-> check snapshot 1]: > word1 < 1`] = `
-Object {
+{
   "classId": "(ID:verb)",
   "id": "(ID:word1)",
 }
 `;
 
 exports[`Test-data service "words" (2) has an [1;37masync[0m function [1;37mgetWordWithTranslations[0m which - when used with valid ID - [0;32mresolves[0m as expected [-> check snapshot 2]: > word2 + translations < 1`] = `
-Object {
+{
   "classId": "(ID:noun)",
   "id": "(ID:word2)",
-  "translations": Array [
-    Object {
+  "translations": [
+    {
       "flectionId": "(ID:noun-flection1)",
       "id": "(ID:word2-translation1)",
       "text_de": "ein Haus",
       "text_sv": "ett hus",
       "wordId": "(ID:word2)",
     },
-    Object {
+    {
       "flectionId": "(ID:noun-flection2)",
       "id": "(ID:word2-translation2)",
       "text_de": "das Haus",
       "text_sv": "huset",
       "wordId": "(ID:word2)",
     },
-    Object {
+    {
       "flectionId": "(ID:noun-flection3)",
       "id": "(ID:word2-translation3)",
       "text_de": "viele Häuser",
       "text_sv": "många hus",
       "wordId": "(ID:word2)",
     },
-    Object {
+    {
       "flectionId": "(ID:noun-flection4)",
       "id": "(ID:word2-translation4)",
       "text_de": "die Häuser",
@@ -45,52 +45,52 @@ Object {
 `;
 
 exports[`Test-data service "words" (3) has an [1;37masync[0m function [1;37mlistAllWords()[0m which - when used w/o arguments - [0;32mresolves[0m as expected [-> check snapshot 3]: > all words < 1`] = `
-Array [
-  Object {
+[
+  {
     "classId": "(ID:verb)",
     "id": "(ID:word1)",
   },
-  Object {
+  {
     "classId": "(ID:noun)",
     "id": "(ID:word2)",
   },
-  Object {
+  {
     "classId": "(ID:adjective)",
     "id": "(ID:word3)",
   },
-  Object {
+  {
     "classId": "(ID:noun)",
     "id": "(ID:word4)",
   },
-  Object {
+  {
     "classId": "(ID:noun)",
     "id": "(ID:word5)",
   },
-  Object {
+  {
     "classId": "(ID:noun)",
     "id": "(ID:word6)",
   },
-  Object {
+  {
     "classId": "(ID:noun)",
     "id": "(ID:word7)",
   },
-  Object {
+  {
     "classId": "(ID:noun)",
     "id": "(ID:word8)",
   },
-  Object {
+  {
     "classId": "(ID:noun)",
     "id": "(ID:word9)",
   },
-  Object {
+  {
     "classId": "(ID:noun)",
     "id": "(ID:word10)",
   },
-  Object {
+  {
     "classId": "(ID:noun)",
     "id": "(ID:word11)",
   },
-  Object {
+  {
     "classId": "(ID:noun)",
     "id": "(ID:word12)",
   },
@@ -98,7 +98,7 @@ Array [
 `;
 
 exports[`Test-data service "words" (4) has an [1;37masync[0m function [1;37mgetTranslation()[0m which - when used with valid ID - [0;32mresolves[0m as expected [-> check snapshot 4]: > 1st translation of word1 < 1`] = `
-Object {
+{
   "flectionId": "(ID:verb-flection1)",
   "id": "(ID:word1-translation1)",
   "text_de": "gehen",
@@ -108,50 +108,50 @@ Object {
 `;
 
 exports[`Test-data service "words" (5) has an [1;37masync[0m function [1;37mlistAllTranslationsOfWord()[0m which - when used with valid ID - [0;32mresolves[0m as expected [-> check snapshot 5]: > all translations of word1 < 1`] = `
-Array [
-  Object {
+[
+  {
     "flectionId": "(ID:verb-flection1)",
     "id": "(ID:word1-translation1)",
     "text_de": "gehen",
     "text_sv": "gå",
     "wordId": "(ID:word1)",
   },
-  Object {
+  {
     "flectionId": "(ID:verb-flection2)",
     "id": "(ID:word1-translation2)",
     "text_de": "er geht",
     "text_sv": "han går",
     "wordId": "(ID:word1)",
   },
-  Object {
+  {
     "flectionId": "(ID:verb-flection2)",
     "id": "(ID:word1-translation3)",
     "text_de": "sie geht",
     "text_sv": "hon går",
     "wordId": "(ID:word1)",
   },
-  Object {
+  {
     "flectionId": "(ID:verb-flection2)",
     "id": "(ID:word1-translation4)",
     "text_de": "wir gehen",
     "text_sv": "vi går",
     "wordId": "(ID:word1)",
   },
-  Object {
+  {
     "flectionId": "(ID:verb-flection3)",
     "id": "(ID:word1-translation5)",
     "text_de": "er ging",
     "text_sv": "han gick",
     "wordId": "(ID:word1)",
   },
-  Object {
+  {
     "flectionId": "(ID:verb-flection4)",
     "id": "(ID:word1-translation6)",
     "text_de": "er ist gegangen",
     "text_sv": "han har gått",
     "wordId": "(ID:word1)",
   },
-  Object {
+  {
     "flectionId": "(ID:verb-flection5)",
     "id": "(ID:word1-translation7)",
     "text_de": "geh!|geh",

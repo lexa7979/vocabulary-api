@@ -1,86 +1,73 @@
+const { GraphQLScalarType } = require('graphql');
+
 const { allTypeDefs, allResolvers } = require('./index');
 
 const { bold } = require('../../../test');
 
 describe(`Array ${bold('allTypeDefs')}`, () => {
-  it(`has the expected content`, () => {
-    expect(allTypeDefs).toContainAllKeys(['Basics', 'WordClass', 'Word', 'User']);
-    Object.values(allTypeDefs).forEach(item => {
-      expect(item).toContainAllKeys(['definitions', 'kind', 'loc']);
-      expect(item.definitions).toBeArray();
-    });
+    it(`has the expected content`, () => {
+        expect(allTypeDefs).toEqual({
+            Basics: expect.stringContaining('#graphql'),
+            User: expect.stringContaining('#graphql'),
+            Word: expect.stringContaining('#graphql'),
+            WordClass: expect.stringContaining('#graphql'),
+        });
 
-    expect(
-      Object.keys(allTypeDefs).map(key => ({
-        key,
-        numDefinitions: allTypeDefs[key].definitions.length,
-      }))
-    ).toMatchInlineSnapshot(`
-      Array [
-        Object {
-          "key": "Basics",
-          "numDefinitions": 1,
-        },
-        Object {
-          "key": "WordClass",
-          "numDefinitions": 3,
-        },
-        Object {
-          "key": "Word",
-          "numDefinitions": 3,
-        },
-        Object {
-          "key": "User",
-          "numDefinitions": 2,
-        },
-      ]
-    `);
-  });
+        const _extractInfo = value => [...value.matchAll(/(type|scalar) \w+/g)].map(item => item[0]);
+        const typesByKey = Object.entries(allTypeDefs).reduce(
+            (acc, [key, value]) => ({ ...acc, [key]: _extractInfo(value) }),
+            {}
+        );
+        expect(typesByKey).toEqual({
+            Basics: ['scalar UUID'],
+            User: ['type Query', 'type User'],
+            Word: ['type Query', 'type Word', 'type Translation'],
+            WordClass: ['type Query', 'type WordClass', 'type Flection'],
+        });
+    });
 });
 
 describe(`Array ${bold('allResolvers')}`, () => {
-  it(`has the expected content`, () => {
-    expect(allResolvers).toMatchInlineSnapshot(`
-      Object {
-        "Basics": Object {
-          "UUID": "UUID",
-        },
-        "User": Object {
-          "Query": Object {
-            "user": [Function],
-            "users": [Function],
-          },
-          "User": Object {
-            "activeWords": [Function],
-          },
-        },
-        "Word": Object {
-          "Query": Object {
-            "word": [Function],
-            "words": [Function],
-          },
-          "Translation": Object {
-            "flection": [Function],
-            "word": [Function],
-          },
-          "Word": Object {
-            "translations": [Function],
-            "wordClass": [Function],
-          },
-        },
-        "WordClass": Object {
-          "Flection": Object {
-            "wordClass": [Function],
-          },
-          "Query": Object {
-            "wordClass": [Function],
-            "wordClasses": [Function],
-          },
-          "WordClass": Object {
-            "flections": [Function],
-          },
-        },
-      }
-    `);
-  });
+    it(`has the expected content`, () => {
+        expect(allResolvers).toEqual({
+            Basics: {
+                UUID: expect.any(GraphQLScalarType),
+            },
+            User: {
+                Query: {
+                    user: expect.any(Function),
+                    users: expect.any(Function),
+                },
+                User: {
+                    activeWords: expect.any(Function),
+                },
+            },
+            Word: {
+                Query: {
+                    word: expect.any(Function),
+                    words: expect.any(Function),
+                },
+                Translation: {
+                    flection: expect.any(Function),
+                    word: expect.any(Function),
+                },
+                Word: {
+                    translations: expect.any(Function),
+                    wordClass: expect.any(Function),
+                },
+            },
+            WordClass: {
+                Flection: {
+                    wordClass: expect.any(Function),
+                },
+                Query: {
+                    wordClass: expect.any(Function),
+                    wordClasses: expect.any(Function),
+                },
+                WordClass: {
+                    flections: expect.any(Function),
+                },
+            },
+        });
+    });
 });
