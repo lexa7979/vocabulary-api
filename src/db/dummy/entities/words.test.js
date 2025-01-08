@@ -1,8 +1,8 @@
-const { getUUID } = require('../../utils/dummyData');
+const { getUUID } = require('../../../utils/dummyData');
 
 const Words = require('./words');
 
-const { ASYNC, bold, EXPECTS, IS_ACCESSIBLE, REJECTS, RESOLVES, copyObject } = require('../../../test');
+const { ASYNC, bold, EXPECTS, IS_ACCESSIBLE, REJECTS, RESOLVES, copyObject } = require('../../../../test');
 
 const Global = {};
 

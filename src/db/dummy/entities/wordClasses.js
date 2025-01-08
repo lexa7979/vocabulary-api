@@ -1,9 +1,9 @@
 const { allWordClasses, allFlections } = require('./wordClasses.storage');
 
 /**
- * @param {import('../types').UUID} classId
+ * @param {import('../../types').UUID} classId
  * @throws
- * @returns {Promise<import('../types').IWordClass>}
+ * @returns {Promise<import('../../types').IWordClass>}
  */
 async function getWordClass(classId) {
     const wordClass = allWordClasses.filter(item => item.id === classId)[0];
@@ -14,9 +14,9 @@ async function getWordClass(classId) {
 }
 
 /**
- * @param {import('../types').UUID} classId
+ * @param {import('../../types').UUID} classId
  * @throws
- * @returns {Promise<import('../types').IWordClass>}
+ * @returns {Promise<import('../../types').IWordClass>}
  */
 async function getWordClassWithFlections(classId) {
     const wordClass = allWordClasses.filter(item => item.id === classId)[0];
@@ -30,7 +30,7 @@ async function getWordClassWithFlections(classId) {
 /**
  * @param {number} [first]
  * @param {number} [offset]
- * @returns {Promise<import('../types').IWordClass[]>}
+ * @returns {Promise<import('../../types').IWordClass[]>}
  */
 async function listAllWordClasses(first = 0, offset = 0) {
     const list = allWordClasses.slice(offset, first ? offset + first : undefined);
@@ -38,9 +38,9 @@ async function listAllWordClasses(first = 0, offset = 0) {
 }
 
 /**
- * @param {import('../types').UUID} id
+ * @param {import('../../types').UUID} id
  * @throws
- * @returns {Promise<import('../types').IFlection>}
+ * @returns {Promise<import('../../types').IFlection>}
  */
 async function getFlection(id) {
     const flection = allFlections.filter(item => item.id === id)[0];
@@ -51,10 +51,10 @@ async function getFlection(id) {
 }
 
 /**
- * @param {import('../types').UUID} classId
+ * @param {import('../../types').UUID} classId
  * @param {number} [first]
  * @param {number} [offset]
- * @returns {Promise<import('../types').IFlection[]>}
+ * @returns {Promise<import('../../types').IFlection[]>}
  */
 async function listAllFlectionsOfWordClass(classId, first = 0, offset = 0) {
     const list = allFlections.filter(item => item.classId === classId).sort((itemA, itemB) => itemA.pos - itemB.pos);

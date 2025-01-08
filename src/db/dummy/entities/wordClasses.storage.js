@@ -1,18 +1,18 @@
 /* eslint-disable camelcase */
 
-/** @import * as UtilTypes from "../../utils/types" */
-/** @import * as Types from "../types" */
+/** @import * as UtilTypes from "../../../utils/types" */
+/** @import * as Types from "../../types" */
 
-const { getUUID } = require('../../utils/dummyData');
+const { getUUID } = require('../../../utils/dummyData');
 
-/** @type {import('../types').IWordClass[]} */
+/** @type {import('../../types').IWordClass[]} */
 const allWordClasses = [
     { id: getUUID('verb'), name_de: 'Verb' },
     { id: getUUID('noun'), name_de: 'Substantiv' },
     { id: getUUID('adjective'), name_de: 'Adjektiv' },
 ];
 
-/** @type {import('../types').IFlection[]} */
+/** @type {import('../../types').IFlection[]} */
 const allFlections = [
     ..._getFlectionItems('verb', [
         //

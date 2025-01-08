@@ -1,7 +1,7 @@
-import { IDataService } from '../dummy-db/types';
+import * as DBTypes from '../db/types';
 
 export interface IGraphQLContext {
-    db: IDataService;
+    db: DBTypes.IDataService;
 }
 
 export interface IArgsWithUUID {

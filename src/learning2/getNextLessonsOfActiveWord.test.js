@@ -1,4 +1,4 @@
-/** @import * as DBTypes from "../db/dummy/types" */
+/** @import * as DBTypes from "../db/types" */
 
 const { bold, IS_ACCESSIBLE, EXPECTS, RESOLVES, RETURNS, REJECTS, CALLS, copyObject } = require('../../test');
 const { getUUID, getTimestampBeforeNow } = require('../utils/dummyData');

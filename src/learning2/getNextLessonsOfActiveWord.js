@@ -1,4 +1,4 @@
-/** @import * as DBTypes from "../db/dummy/types" */
+/** @import * as DBTypes from "../db/types" */
 
 const ONE_HOUR = 60 * 60 * 1000;
 const ONE_DAY = 24 * ONE_HOUR;

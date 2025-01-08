@@ -1,11 +1,11 @@
 /* eslint-disable camelcase */
 
-/** @import * as UtilTypes from "../../utils/types" */
-/** @import * as Types from "../types" */
+/** @import * as UtilTypes from "../../../utils/types" */
+/** @import * as Types from "../../types" */
 
-const { getUUID } = require('../../utils/dummyData');
+const { getUUID } = require('../../../utils/dummyData');
 
-/** @type {import('../types').IWord[]} */
+/** @type {import('../../types').IWord[]} */
 const allWords = [
     { id: getUUID('word1'), classId: getUUID('verb') },
     { id: getUUID('word2'), classId: getUUID('noun') },
@@ -21,7 +21,7 @@ const allWords = [
     { id: getUUID('word12'), classId: getUUID('noun') },
 ];
 
-/** @type {import('../types').ITranslation[]} */
+/** @type {import('../../types').ITranslation[]} */
 const allTranslations = [
     ..._getTranslationItems('word1', [
         ['verb-flection1', 'gehen', 'gå'],

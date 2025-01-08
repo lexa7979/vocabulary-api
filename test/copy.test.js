@@ -48,7 +48,9 @@ function runTestsAboutCopyObject() {
         it(`- when used w/o arguments - ${RETURNS} undefined`, () => expect(copyObject()).toBeUndefined());
 
         it(`- when "input" is a Promise - ${FAILS} as expected`, async () => {
-            const test = new Promise(resolve => resolve());
+            const test = new Promise(resolve => {
+                resolve();
+            });
 
             expect(() => copyObject(test)).toThrow("won't process a Promise");
 

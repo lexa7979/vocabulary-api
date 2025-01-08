@@ -2,7 +2,7 @@
 // const DummyDB = jest.requireActual('./index');
 // const DummyDBMockup = jest.requireMock('./index');
 
-const { copyObject } = require('../../test');
+const { copyObject } = require('../../../test');
 
 const DummyDB = require('./index');
 

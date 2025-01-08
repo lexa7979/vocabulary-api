@@ -1,10 +1,10 @@
 /* eslint-disable no-unused-vars */
 
-const { getUUID, findKeyOfUUID } = require('../../utils/dummyData');
+const { getUUID, findKeyOfUUID } = require('../../../utils/dummyData');
 
 /**
- * @param {import('../types').UUID} classId
- * @returns {Promise<import('../types').IWordClass>}
+ * @param {import('../../types').UUID} classId
+ * @returns {Promise<import('../../types').IWordClass>}
  */
 async function getWordClass(classId) {
     if (classId === getUUID('verb')) {
@@ -14,8 +14,8 @@ async function getWordClass(classId) {
 }
 
 /**
- * @param {import('../types').UUID} classId
- * @returns {Promise<import('../types').IWordClass>}
+ * @param {import('../../types').UUID} classId
+ * @returns {Promise<import('../../types').IWordClass>}
  */
 async function getWordClassWithFlections(classId) {
     if (classId === getUUID('verb')) {
@@ -37,7 +37,7 @@ async function getWordClassWithFlections(classId) {
 /**
  * @param {number} [first]
  * @param {number} [offset]
- * @returns {Promise<import('../types').IWordClass[]>}
+ * @returns {Promise<import('../../types').IWordClass[]>}
  */
 async function listAllWordClasses(first = 0, offset = 0) {
     if (offset === 0) {
@@ -47,34 +47,34 @@ async function listAllWordClasses(first = 0, offset = 0) {
 }
 
 /**
- * @param {import('../types').UUID} flectionId
- * @returns {Promise<import('../types').IFlection>}
+ * @param {import('../../types').UUID} flectionId
+ * @returns {Promise<import('../../types').IFlection>}
  */
 async function getFlection(flectionId) {
     throw new Error(`Unsupported ID ("${findKeyOfUUID(flectionId)}") in mockup`);
 }
 
 /**
- * @param {import('../types').UUID} classId
+ * @param {import('../../types').UUID} classId
  * @param {number} [first]
  * @param {number} [offset]
- * @returns {Promise<import('../types').IFlection[]>}
+ * @returns {Promise<import('../../types').IFlection[]>}
  */
 async function listAllFlectionsOfWordClass(classId, first = 0, offset = 0) {
     throw new Error(`Unsupported ID ("${findKeyOfUUID(classId)}") in mockup`);
 }
 
 /**
- * @param {import('../types').UUID} wordId
- * @returns {Promise<import('../types').IWord>}
+ * @param {import('../../types').UUID} wordId
+ * @returns {Promise<import('../../types').IWord>}
  */
 async function getWord(wordId) {
     throw new Error(`Unsupported ID ("${findKeyOfUUID(wordId)}") in mockup`);
 }
 
 /**
- * @param {import('../types').UUID} wordId
- * @returns {Promise<import('../types').IWord>}
+ * @param {import('../../types').UUID} wordId
+ * @returns {Promise<import('../../types').IWord>}
  */
 async function getWordWithTranslations(wordId) {
     throw new Error(`Unsupported ID ("${findKeyOfUUID(wordId)}") in mockup`);
@@ -83,33 +83,33 @@ async function getWordWithTranslations(wordId) {
 /**
  * @param {number} [first]
  * @param {number} [offset]
- * @returns {Promise<import('../types').IWord[]>}
+ * @returns {Promise<import('../../types').IWord[]>}
  */
 async function listAllWords(first = 0, offset = 0) {
     throw new Error(`Missing list for mockup`);
 }
 
 /**
- * @param {import('../types').UUID} translationId
- * @returns {Promise<import('../types').ITranslation>}
+ * @param {import('../../types').UUID} translationId
+ * @returns {Promise<import('../../types').ITranslation>}
  */
 async function getTranslation(translationId) {
     throw new Error(`Unsupported ID ("${findKeyOfUUID(translationId)}") in mockup`);
 }
 
 /**
- * @param {import('../types').UUID} wordId
+ * @param {import('../../types').UUID} wordId
  * @param {number} [first]
  * @param {number} [offset]
- * @returns {Promise<import('../types').ITranslation[]>}
+ * @returns {Promise<import('../../types').ITranslation[]>}
  */
 async function listAllTranslationsOfWord(wordId, first = 0, offset = 0) {
     throw new Error(`Unsupported ID ("${findKeyOfUUID(wordId)}") in mockup`);
 }
 
 /**
- * @param {import('../types').UUID} userId
- * @returns {Promise<import('../types').IUser>}
+ * @param {import('../../types').UUID} userId
+ * @returns {Promise<import('../../types').IUser>}
  */
 async function getUser(userId) {
     throw new Error(`Unsupported ID ("${findKeyOfUUID(userId)}") in mockup`);
@@ -118,25 +118,25 @@ async function getUser(userId) {
 /**
  * @param {number} [first]
  * @param {number} [offset]
- * @returns {Promise<import('../types').IUser[]>}
+ * @returns {Promise<import('../../types').IUser[]>}
  */
 async function listAllUsers(first = 0, offset = 0) {
     throw new Error(`Missing list for mockup`);
 }
 
 /**
- * @param {import('../types').UUID} activeWordId
- * @returns {Promise<import('../types').IActiveWord>}
+ * @param {import('../../types').UUID} activeWordId
+ * @returns {Promise<import('../../types').IActiveWord>}
  */
 async function getActiveWord(activeWordId) {
     throw new Error(`Unsupported ID ("${findKeyOfUUID(activeWordId)}") in mockup`);
 }
 
 /**
- * @param {import('../types').UUID} userId
+ * @param {import('../../types').UUID} userId
  * @param {number} [first]
  * @param {number} [offset]
- * @returns {Promise<import('../types').IActiveWord[]>}
+ * @returns {Promise<import('../../types').IActiveWord[]>}
  */
 async function listAllActiveWordsOfUser(userId, first = 0, offset = 0) {
     throw new Error(`Unsupported ID ("${findKeyOfUUID(userId)}") in mockup`);

@@ -1,4 +1,4 @@
-const db = require('../../dummy-db');
+const db = require('../../db/dummy');
 
 const { getUUID } = require('../../utils/dummyData');
 

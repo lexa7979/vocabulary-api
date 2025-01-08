@@ -1,7 +1,7 @@
-/** @import * as UtilTypes from "../../utils/types" */
-/** @import * as Types from "../types" */
+/** @import * as UtilTypes from "../../../utils/types" */
+/** @import * as Types from "../../types" */
 
-const { getUUID, getTimestampBeforeNow, getTimestampAfterNow } = require('../../utils/dummyData');
+const { getUUID, getTimestampBeforeNow, getTimestampAfterNow } = require('../../../utils/dummyData');
 
 /** @type {Types.IUser[]} */
 const allUsers = [

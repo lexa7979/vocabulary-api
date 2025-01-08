@@ -1,4 +1,4 @@
-/** @import * as Types from "../types" */
+/** @import * as Types from "../../types" */
 
 const { allUsers, allActiveWords } = require('./users.storage');
 

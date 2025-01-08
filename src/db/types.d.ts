@@ -1,4 +1,4 @@
-export type IDataService = typeof import('.');
+export type IDataService = typeof import('./dummy');
 
 export type UUID = string;
 
