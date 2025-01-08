@@ -1,6 +1,9 @@
+/** @import * as UtilTypes from "../../utils/types" */
+/** @import * as Types from "../types" */
+
 const { getUUID, getTimestampBeforeNow, getTimestampAfterNow } = require('../../utils/dummyData');
 
-/** @type {import('../types').IUser[]} */
+/** @type {Types.IUser[]} */
 const allUsers = [
     {
         id: getUUID('user1'),
@@ -38,10 +41,10 @@ const allUsers = [
 
 /**
  * @param {number} step
- * @param {string} wordIdKey
- * @param {string} flectionIdKey
+ * @param {UtilTypes.TGetUuidKeys} wordIdKey
+ * @param {UtilTypes.TGetUuidKeys} flectionIdKey
  * @param {number} result
- * @returns {import('../types').IUser["learnPath"][0]}
+ * @returns {Types.IUser["learnPath"][0]}
  */
 function _getLearnPathItem(step, wordIdKey, flectionIdKey, result) {
     const wordId = getUUID(wordIdKey);
@@ -49,13 +52,14 @@ function _getLearnPathItem(step, wordIdKey, flectionIdKey, result) {
     return { step, wordId, flectionId, result };
 }
 
-/** @type {import('../types').IActiveWord[]} */
+/** @type {Types.IActiveWord[]} */
 const allActiveWords = [
     {
         id: getUUID('user1-activeWord1'),
         userId: getUUID('user1'),
         wordId: getUUID('word1'),
         learnProgress: _getLearnProgress(
+            // @ts-ignore
             index => `verb-flection${index}`,
             [0, null],
             [0, null],
@@ -114,6 +118,7 @@ const allActiveWords = [
         userId: getUUID('user1'),
         wordId: getUUID('word3'),
         learnProgress: _getLearnProgress(
+            // @ts-ignore
             index => `adjective-flection${index}`,
             [0, null],
             [0, null],
@@ -182,9 +187,9 @@ const allActiveWords = [
 ];
 
 /**
- * @param {(index: number) => string} getFlectionKey
+ * @param {(index: number) => UtilTypes.TGetUuidKeys} getFlectionKey
  * @param {Array<[currGroup: number, changedAt: string]>} dataOfSingleFlections
- * @returns {import('../types').IActiveWord["learnProgress"]}
+ * @returns {Types.IActiveWord["learnProgress"]}
  */
 function _getLearnProgress(getFlectionKey, ...dataOfSingleFlections) {
     return dataOfSingleFlections.map(([currGroup, changedAt], index) => ({

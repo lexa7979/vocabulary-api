@@ -1,5 +1,8 @@
 /* eslint-disable camelcase */
 
+/** @import * as UtilTypes from "../../utils/types" */
+/** @import * as Types from "../types" */
+
 const { getUUID } = require('../../utils/dummyData');
 
 /** @type {import('../types').IWordClass[]} */
@@ -36,13 +39,14 @@ const allFlections = [
 ];
 
 /**
- * @param {string} classIdKey
+ * @param {UtilTypes.TGetUuidKeys} classIdKey
  * @param  {string[]} listOfFlectionNames
- * @returns {import('../types').IFlection[]}
+ * @returns {Types.IFlection[]}
  */
 function _getFlectionItems(classIdKey, listOfFlectionNames) {
     const classId = getUUID(classIdKey);
     return listOfFlectionNames.map((name_de, index) => ({
+        // @ts-ignore
         id: getUUID(`${classIdKey}-flection${index + 1}`),
         classId,
         pos: index,

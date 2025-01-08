@@ -1,13 +1,13 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Test-data service "words" (1) has an [1;37masync[0m function [1;37mgetWord()[0m which - when used with valid ID - [0;32mresolves[0m as expected [-> check snapshot 1]: > word1 < 1`] = `
+exports[`Test-data service "words" (1) has an [1;93masync[0;90m function [1;93mgetWord()[0;90m which - when used with valid ID - [0;92mresolves[0;90m as expected [-> check snapshot 1]: > word1 < 1`] = `
 {
   "classId": "(ID:verb)",
   "id": "(ID:word1)",
 }
 `;
 
-exports[`Test-data service "words" (2) has an [1;37masync[0m function [1;37mgetWordWithTranslations[0m which - when used with valid ID - [0;32mresolves[0m as expected [-> check snapshot 2]: > word2 + translations < 1`] = `
+exports[`Test-data service "words" (2) has an [1;93masync[0;90m function [1;93mgetWordWithTranslations[0;90m which - when used with valid ID - [0;92mresolves[0;90m as expected [-> check snapshot 2]: > word2 + translations < 1`] = `
 {
   "classId": "(ID:noun)",
   "id": "(ID:word2)",
@@ -44,7 +44,7 @@ exports[`Test-data service "words" (2) has an [1;37masync[0m function [1;37mg
 }
 `;
 
-exports[`Test-data service "words" (3) has an [1;37masync[0m function [1;37mlistAllWords()[0m which - when used w/o arguments - [0;32mresolves[0m as expected [-> check snapshot 3]: > all words < 1`] = `
+exports[`Test-data service "words" (3) has an [1;93masync[0;90m function [1;93mlistAllWords()[0;90m which - when used w/o arguments - [0;92mresolves[0;90m as expected [-> check snapshot 3]: > all words < 1`] = `
 [
   {
     "classId": "(ID:verb)",
@@ -97,7 +97,7 @@ exports[`Test-data service "words" (3) has an [1;37masync[0m function [1;37ml
 ]
 `;
 
-exports[`Test-data service "words" (4) has an [1;37masync[0m function [1;37mgetTranslation()[0m which - when used with valid ID - [0;32mresolves[0m as expected [-> check snapshot 4]: > 1st translation of word1 < 1`] = `
+exports[`Test-data service "words" (4) has an [1;93masync[0;90m function [1;93mgetTranslation()[0;90m which - when used with valid ID - [0;92mresolves[0;90m as expected [-> check snapshot 4]: > 1st translation of word1 < 1`] = `
 {
   "flectionId": "(ID:verb-flection1)",
   "id": "(ID:word1-translation1)",
@@ -107,7 +107,7 @@ exports[`Test-data service "words" (4) has an [1;37masync[0m function [1;37mg
 }
 `;
 
-exports[`Test-data service "words" (5) has an [1;37masync[0m function [1;37mlistAllTranslationsOfWord()[0m which - when used with valid ID - [0;32mresolves[0m as expected [-> check snapshot 5]: > all translations of word1 < 1`] = `
+exports[`Test-data service "words" (5) has an [1;93masync[0;90m function [1;93mlistAllTranslationsOfWord()[0;90m which - when used with valid ID - [0;92mresolves[0;90m as expected [-> check snapshot 5]: > all translations of word1 < 1`] = `
 [
   {
     "flectionId": "(ID:verb-flection1)",

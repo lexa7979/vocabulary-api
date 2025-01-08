@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Test-data service "users" (1) has an [1;37masync[0m function [1;37mgetUser()[0m which - when used with valid ID - [0;32mresolves[0m as expected [-> check snapshot 1]: > user1 < 1`] = `
+exports[`Test-data service "users" (1) has an [1;93masync[0;90m function [1;93mgetUser()[0;90m which - when used with valid ID - [0;92mresolves[0;90m as expected [-> check snapshot 1]: > user1 < 1`] = `
 {
   "currStep": 8,
   "currentLessons": [
@@ -38,7 +38,7 @@ exports[`Test-data service "users" (1) has an [1;37masync[0m function [1;37mg
 }
 `;
 
-exports[`Test-data service "users" (2) has an [1;37masync[0m function [1;37mlistAllUsers()[0m which - when used w/o arguments - [0;32mresolves[0m as expected [-> check snapshot 2]: > all users < 1`] = `
+exports[`Test-data service "users" (2) has an [1;93masync[0;90m function [1;93mlistAllUsers()[0;90m which - when used w/o arguments - [0;92mresolves[0;90m as expected [-> check snapshot 2]: > all users < 1`] = `
 [
   {
     "currStep": 8,
@@ -85,7 +85,7 @@ exports[`Test-data service "users" (2) has an [1;37masync[0m function [1;37ml
 ]
 `;
 
-exports[`Test-data service "users" (3) has an [1;37masync[0m function [1;37mgetActiveWord()[0m which - when used with valid ID - [0;32mresolves[0m as expected [-> check snapshot 3]: > 1st activeWord of user1 < 1`] = `
+exports[`Test-data service "users" (3) has an [1;93masync[0;90m function [1;93mgetActiveWord()[0;90m which - when used with valid ID - [0;92mresolves[0;90m as expected [-> check snapshot 3]: > 1st activeWord of user1 < 1`] = `
 {
   "events": [
     {
@@ -165,7 +165,7 @@ exports[`Test-data service "users" (3) has an [1;37masync[0m function [1;37mg
 }
 `;
 
-exports[`Test-data service "users" (4) has an [1;37masync[0m function [1;37mlistAllActiveWordsOfUser()[0m which - when used with valid ID - [0;32mresolves[0m as expected [-> check snapshot 4]: > all active-words of user1 < 1`] = `
+exports[`Test-data service "users" (4) has an [1;93masync[0;90m function [1;93mlistAllActiveWordsOfUser()[0;90m which - when used with valid ID - [0;92mresolves[0;90m as expected [-> check snapshot 4]: > all active-words of user1 < 1`] = `
 [
   {
     "events": [

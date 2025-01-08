@@ -1,13 +1,16 @@
+/** @import * as Types from "../types" */
+
 const { allUsers, allActiveWords } = require('./users.storage');
 
 /**
- * @param {import('../types').UUID} id
+ * @param {Types.UUID} userId
  * @throws
+ * @returns {Promise<Types.IUser>}
  */
-async function getUser(id) {
-    const user = allUsers.filter(item => item.id === id)[0];
+async function getUser(userId) {
+    const user = allUsers.filter(item => item.id === userId)[0];
     if (user == null) {
-        throw new Error(`getUser() failed - invalid ID (${id})`);
+        throw new Error(`getUser() failed - invalid ID (${userId})`);
     }
     return { ...user };
 }
@@ -15,6 +18,7 @@ async function getUser(id) {
 /**
  * @param {number} [first]
  * @param {number} [offset]
+ * @returns {Promise<Types.IUser[]>}
  */
 async function listAllUsers(first = 0, offset = 0) {
     const list = allUsers.slice(offset, first ? offset + first : undefined);
@@ -24,22 +28,23 @@ async function listAllUsers(first = 0, offset = 0) {
 }
 
 /**
- * @param {import('../types').UUID} id
+ * @param {Types.UUID} activeWordId
  * @throws
+ * @returns {Promise<Types.IActiveWord>}
  */
-async function getActiveWord(id) {
-    const activeWord = allActiveWords.filter(item => item.id === id)[0];
+async function getActiveWord(activeWordId) {
+    const activeWord = allActiveWords.filter(item => item.id === activeWordId)[0];
     if (activeWord == null) {
-        throw new Error(`getActiveWord() failed - invalid ID (${id})`);
+        throw new Error(`getActiveWord() failed - invalid ID (${activeWordId})`);
     }
     return activeWord;
 }
 
 /**
- * @param {import('../types').UUID} userId
+ * @param {Types.UUID} userId
  * @param {number} [first]
  * @param {number} [offset]
- * @returns {Promise<Array<import('../types').IActiveWord>>}
+ * @returns {Promise<Types.IActiveWord[]>}
  */
 async function listAllActiveWordsOfUser(userId, first = 0, offset = 0) {
     const list = allActiveWords

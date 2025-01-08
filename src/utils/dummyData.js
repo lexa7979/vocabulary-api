@@ -1,10 +1,10 @@
+/** @import * as Types from "./types" */
+
 const { v4: uuid } = require('uuid');
 // eslint-disable-next-line import/no-extraneous-dependencies
 const humanizeDuration = require('humanize-duration');
 
 const { registerReplaceAction } = require('../../test');
-
-/** @typedef {string} UUID */
 
 const ONE_MINUTE = 60 * 1000;
 const ONE_HOUR = 60 * ONE_MINUTE;
@@ -26,8 +26,8 @@ const Global = {
 };
 
 /**
- * @param {string} key
- * @returns {UUID}
+ * @param {Types.TGetUuidKeys} key
+ * @returns {Types.UUID}
  */
 function getUUID(key) {
     if (Global.idBuffer[key] == null) {
@@ -48,7 +48,7 @@ function _replaceIfUUID(value) {
 }
 
 /**
- * @param {UUID} id
+ * @param {Types.UUID} id
  * @returns {string | null}
  */
 function findKeyOfUUID(id) {

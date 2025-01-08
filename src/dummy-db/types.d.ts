@@ -38,7 +38,7 @@ export interface IUser {
     login: string;
     name: string;
     currStep: number;
-    learnPath: Array<{
+    learnPath?: Array<{
         step: number;
         wordId: string;
         flectionId: string;
@@ -57,13 +57,13 @@ export interface ILesson {
     doneAt?: number;
 }
 
-export type TResult = 'correct' | 'wrong';
+export type TResult = 'correct' | 'wrong' | 'partly-correct';
 
 export interface IActiveWord {
     id: UUID;
     userId: UUID;
     wordId: UUID;
-    learnProgress: Array<{
+    learnProgress?: Array<{
         flectionId: UUID;
         currGroup: number;
         changedAt: string;
@@ -80,14 +80,9 @@ export interface IActiveWordEvent {
 }
 
 export type TActiveWordEventType =
-    | 'add'
-    // | 'update'
-    // | 'remove'
-    // | 'reset'
-    | 'flection-result';
-// | 'flection-result-change'
-// | 'flection-result-revoke';
-// | 'flection-reset';
+    | 'add' // | 'update' | 'remove' | 'reset'
+    | 'flection-result' // | 'flection-result-change'
+    | 'flection-result-revoke'; // | 'flection-reset';
 
 export interface INextLesson {
     flectionId: UUID;

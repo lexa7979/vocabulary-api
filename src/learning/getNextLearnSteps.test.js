@@ -36,6 +36,7 @@ describe(`Learning utility ${bold('getNextLearnSteps()')}`, () => {
 
         const NextLearnStepsFinder = getHelperClass();
         const helper = new NextLearnStepsFinder({
+            // @ts-ignore
             db: DbMockup,
             userId: DB_MOCKUP_USERID,
             nextStepsCount: 25,
@@ -43,93 +44,91 @@ describe(`Learning utility ${bold('getNextLearnSteps()')}`, () => {
 
         await helper.process();
 
-        expect(copyObject(helper, { replaceAllSpecials: true }).newLearnSteps).toMatchInlineSnapshot(`
-[
-  {
-    "flectionId": "(ID:flection1)",
-    "result": null,
-    "step": 14,
-    "wordId": "(ID:word14)",
-  },
-  {
-    "flectionId": "(ID:flection2)",
-    "result": null,
-    "step": 15,
-    "wordId": "(ID:word17)",
-  },
-  {
-    "flectionId": "(ID:flection2)",
-    "result": null,
-    "step": 16,
-    "wordId": "(ID:word5)",
-  },
-  {
-    "flectionId": "(ID:flection1)",
-    "result": null,
-    "step": 17,
-    "wordId": "(ID:word7)",
-  },
-  {
-    "flectionId": "(ID:flection2)",
-    "result": null,
-    "step": 18,
-    "wordId": "(ID:word3)",
-  },
-  {
-    "flectionId": "(ID:flection1)",
-    "result": null,
-    "step": 19,
-    "wordId": "(ID:word4)",
-  },
-  {
-    "flectionId": "(ID:flection1)",
-    "result": null,
-    "step": 20,
-    "wordId": "(ID:word9)",
-  },
-  {
-    "flectionId": "(ID:flection2)",
-    "result": null,
-    "step": 21,
-    "wordId": "(ID:word1)",
-  },
-  {
-    "flectionId": "(ID:flection2)",
-    "result": null,
-    "step": 22,
-    "wordId": "(ID:word2)",
-  },
-  {
-    "flectionId": "(ID:flection1)",
-    "result": null,
-    "step": 23,
-    "wordId": "(ID:word10)",
-  },
-  {
-    "flectionId": "(ID:flection3)",
-    "result": null,
-    "step": 24,
-    "wordId": "(ID:word6)",
-  },
-  {
-    "flectionId": "(ID:flection3)",
-    "result": null,
-    "step": 25,
-    "wordId": "(ID:word8)",
-  },
-  {
-    "flectionId": "(ID:flection3)",
-    "result": null,
-    "step": 26,
-    "wordId": "(ID:word15)",
-  },
-  {
-    "flectionId": "(ID:flection2)",
-    "result": null,
-    "step": 27,
-    "wordId": "(ID:word16)",
-  },
-]
-`);
+        expect(copyObject(helper, { replaceAllSpecials: true }).newLearnSteps).toEqual([
+            {
+                flectionId: '(ID:flection1)',
+                result: null,
+                step: 14,
+                wordId: '(ID:word14)',
+            },
+            {
+                flectionId: '(ID:flection2)',
+                result: null,
+                step: 15,
+                wordId: '(ID:word17)',
+            },
+            {
+                flectionId: '(ID:flection2)',
+                result: null,
+                step: 16,
+                wordId: '(ID:word5)',
+            },
+            {
+                flectionId: '(ID:flection1)',
+                result: null,
+                step: 17,
+                wordId: '(ID:word7)',
+            },
+            {
+                flectionId: '(ID:flection2)',
+                result: null,
+                step: 18,
+                wordId: '(ID:word3)',
+            },
+            {
+                flectionId: '(ID:flection1)',
+                result: null,
+                step: 19,
+                wordId: '(ID:word4)',
+            },
+            {
+                flectionId: '(ID:flection1)',
+                result: null,
+                step: 20,
+                wordId: '(ID:word9)',
+            },
+            {
+                flectionId: '(ID:flection2)',
+                result: null,
+                step: 21,
+                wordId: '(ID:word1)',
+            },
+            {
+                flectionId: '(ID:flection2)',
+                result: null,
+                step: 22,
+                wordId: '(ID:word2)',
+            },
+            {
+                flectionId: '(ID:flection1)',
+                result: null,
+                step: 23,
+                wordId: '(ID:word10)',
+            },
+            {
+                flectionId: '(ID:flection3)',
+                result: null,
+                step: 24,
+                wordId: '(ID:word6)',
+            },
+            {
+                flectionId: '(ID:flection3)',
+                result: null,
+                step: 25,
+                wordId: '(ID:word8)',
+            },
+            {
+                flectionId: '(ID:flection3)',
+                result: null,
+                step: 26,
+                wordId: '(ID:word15)',
+            },
+            {
+                flectionId: '(ID:flection2)',
+                result: null,
+                step: 27,
+                wordId: '(ID:word16)',
+            },
+        ]);
     });
 });

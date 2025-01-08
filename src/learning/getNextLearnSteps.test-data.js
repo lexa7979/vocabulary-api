@@ -192,8 +192,10 @@ function _fakeWordWithTranslations(wordName, flectionSuffixes) {
     return {
         id: wordId,
         translations: flectionSuffixes.map((suffix, index) => ({
+            // @ts-ignore
             id: getUUID(`translation${index + 1}`),
             wordId: getUUID(wordName),
+            // @ts-ignore
             flectionId: getUUID(`flection${suffix}`),
             text_de: `${wordName}-flection${suffix}-de`,
             text_sv: `${wordName}-flection${suffix}-sv`,
@@ -212,10 +214,12 @@ function _fakeLearnStep(step, wordName, flectionName) {
 
 function _fakeActiveWord(userName, wordName, index, listOfFlectionsWithGroupAndAge) {
     return {
+        // @ts-ignore
         id: getUUID(`${userName}-activeWord${index}`),
         userId: getUUID(userName),
         wordId: getUUID(wordName),
         learnProgress: listOfFlectionsWithGroupAndAge.map(([suffix, currGroup, age]) => ({
+            // @ts-ignore
             flectionId: getUUID(`flection${suffix}`),
             currGroup,
             changedAt: getTimestampBeforeNow(age),

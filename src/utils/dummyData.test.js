@@ -38,6 +38,7 @@ function runTestsAboutGetUUID() {
 
         it(`${EXPECTS} one argument (key)`, () => expect(getUUID).toHaveLength(1));
 
+        // @ts-ignore
         it(`- when used w/o argument - ${RETURNS} an UUID`, () => expect(getUUID()).toMatch(matchUUID));
 
         it(`- when used with "key" - ${RETURNS} an UUID`, () => expect(getUUID(testKey)).toMatch(matchUUID));
@@ -49,7 +50,9 @@ function runTestsAboutGetUUID() {
         });
 
         it(`- when used twice with different "key" - ${RETURNS} different UUIDs`, () => {
+            // @ts-ignore
             const result1 = getUUID('key1');
+            // @ts-ignore
             const result2 = getUUID('key2');
             expect(result1).not.toBe(result2);
         });
@@ -87,6 +90,7 @@ function runTestsAboutFindKeyOfUUID() {
 
         it(`${EXPECTS} one argument (id)`, () => expect(findKeyOfUUID).toBeFunction());
 
+        // @ts-ignore
         it(`- when used w/o argument - ${RETURNS} null`, () => expect(findKeyOfUUID()).toBeNull());
 
         it(`- when used with unknown "id" - ${RETURNS} null`, () => {
@@ -96,6 +100,7 @@ function runTestsAboutFindKeyOfUUID() {
         });
 
         it(`- when used with "id" delivered by getUUID() - ${RETURNS} correct key of ID`, () => {
+            // @ts-ignore
             const testId = DummyData.getUUID('testKey');
 
             expect(findKeyOfUUID(testId)).toBe('testKey');
@@ -137,7 +142,9 @@ function runTestsAboutGetTimestampBeforeNow() {
 
         it(`- when used twice with "minutes" in inputBag - ${RETURNS} same number`, async () => {
             const result1 = getTimestampBeforeNow({ minutes: 7 });
-            await new Promise(resolve => setTimeout(resolve, 200));
+            await new Promise(resolve => {
+                setTimeout(resolve, 200);
+            });
             const result2 = getTimestampBeforeNow({ minutes: 7 });
             expect(result1).toBe(result2);
         });

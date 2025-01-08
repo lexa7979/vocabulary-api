@@ -1,13 +1,13 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Test-data service "WordClasses" (1) has an [1;37masync[0m function [1;37mgetWordClass()[0m which - when used with valid ID - [0;32mresolves[0m with expected data [-> check snapshot 1]: > word-class "verb" < 1`] = `
+exports[`Test-data service "WordClasses" (1) has an [1;93masync[0;90m function [1;93mgetWordClass()[0;90m which - when used with valid ID - [0;92mresolves[0;90m with expected data [-> check snapshot 1]: > word-class "verb" < 1`] = `
 {
   "id": "(ID:verb)",
   "name_de": "Verb",
 }
 `;
 
-exports[`Test-data service "WordClasses" (2) has an [1;37masync[0m function [1;37mgetWordClassWithFlections()[0m which - when used with valid ID - [0;32mresolves[0m with expected data [-> check snapshot 2]: > word-class "verb" + flections < 1`] = `
+exports[`Test-data service "WordClasses" (2) has an [1;93masync[0;90m function [1;93mgetWordClassWithFlections()[0;90m which - when used with valid ID - [0;92mresolves[0;90m with expected data [-> check snapshot 2]: > word-class "verb" + flections < 1`] = `
 {
   "flections": [
     {
@@ -46,7 +46,7 @@ exports[`Test-data service "WordClasses" (2) has an [1;37masync[0m function [
 }
 `;
 
-exports[`Test-data service "WordClasses" (3) has an [1;37masync[0m function [1;37mlistAllWordClassIds()[0m which - when used w/o arguments - [0;32mresolves[0m with expected data [-> check snapshot 3]: > all word-classes < 1`] = `
+exports[`Test-data service "WordClasses" (3) has an [1;93masync[0;90m function [1;93mlistAllWordClassIds()[0;90m which - when used w/o arguments - [0;92mresolves[0;90m with expected data [-> check snapshot 3]: > all word-classes < 1`] = `
 [
   {
     "id": "(ID:verb)",
@@ -63,7 +63,7 @@ exports[`Test-data service "WordClasses" (3) has an [1;37masync[0m function [
 ]
 `;
 
-exports[`Test-data service "WordClasses" (4) has an [1;37masync[0m function [1;37mgetFlection()[0m which - when used with valid ID - [0;32mresolves[0m with expected data [-> check snapshot 4]: > 3rd flection of word-class "noun" < 1`] = `
+exports[`Test-data service "WordClasses" (4) has an [1;93masync[0;90m function [1;93mgetFlection()[0;90m which - when used with valid ID - [0;92mresolves[0;90m with expected data [-> check snapshot 4]: > 3rd flection of word-class "noun" < 1`] = `
 {
   "classId": "(ID:noun)",
   "id": "(ID:noun-flection3)",
@@ -72,7 +72,7 @@ exports[`Test-data service "WordClasses" (4) has an [1;37masync[0m function [
 }
 `;
 
-exports[`Test-data service "WordClasses" (5) has an [1;37masync[0m function [1;37mlistAllFlectionsOfWordClass()[0m which - when used with valid ID - [0;32mresolves[0m with expected data [-> check snapshot 5]: > all flections of word-class "noun" < 1`] = `
+exports[`Test-data service "WordClasses" (5) has an [1;93masync[0;90m function [1;93mlistAllFlectionsOfWordClass()[0;90m which - when used with valid ID - [0;92mresolves[0;90m with expected data [-> check snapshot 5]: > all flections of word-class "noun" < 1`] = `
 [
   {
     "classId": "(ID:noun)",
