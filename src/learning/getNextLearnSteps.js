@@ -1,3 +1,5 @@
+/** @import * as DBTypes from "../db/dummy/types" */
+
 module.exports = getNextLearnSteps;
 
 module.exports._testInternals = {
@@ -18,7 +20,7 @@ const NORMAL_STEPCOUNT_BEFORE_REPEATING_WORD = 10;
 
 class NextLearnStepsFinder {
     /**
-     * @param {{ db: import("../dummy-db/types").IDataService, userId: string, nextStepsCount: number }} inputBag
+     * @param {{ db: DBTypes.IDataService, userId: string, nextStepsCount: number }} inputBag
      */
     constructor(inputBag) {
         if (_isNoObject(inputBag)) {
@@ -322,8 +324,8 @@ class NextLearnStepsFinder {
 
 /**
  * @param {object} inputBag
- * @param {import("../dummy-db/types").IDataService} inputBag.db
- * @param {import("../dummy-db/types").UUID} inputBag.userId
+ * @param {DBTypes.IDataService} inputBag.db
+ * @param {DBTypes.UUID} inputBag.userId
  * @param {number} inputBag.nextStepsCount
  */
 async function getNextLearnSteps(inputBag) {

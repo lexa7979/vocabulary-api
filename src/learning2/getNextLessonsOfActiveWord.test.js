@@ -1,4 +1,4 @@
-/** @import * as DBTypes from "../dummy-db/types" */
+/** @import * as DBTypes from "../db/dummy/types" */
 
 const { bold, IS_ACCESSIBLE, EXPECTS, RESOLVES, RETURNS, REJECTS, CALLS, copyObject } = require('../../test');
 const { getUUID, getTimestampBeforeNow } = require('../utils/dummyData');
@@ -46,19 +46,19 @@ describe(`Learning utility ${bold('getNextLessonsOfActiveWord()')}`, () => {
     }
 
     /**
-     * @param {import('../dummy-db/types').TResult} result
-     * @param {import('../dummy-db/types').UUID} flectionId
+     * @param {DBTypes.TResult} result
+     * @param {DBTypes.UUID} flectionId
      * @param {number} timestamp
      */
     function _getResultEvent(result, flectionId, timestamp) {
-        /** @type {import('../dummy-db/types').IActiveWordEvent} */
+        /** @type {DBTypes.IActiveWordEvent} */
         const event = { type: 'flection-result', timestamp, flectionId, result };
         return event;
     }
 
     /** @param {number} timestamp */
     function _getRevokeEvent(timestamp) {
-        /** @type {import('../dummy-db/types').IActiveWordEvent} */
+        /** @type {DBTypes.IActiveWordEvent} */
         const event = { type: 'flection-result-revoke', timestamp };
         return event;
     }

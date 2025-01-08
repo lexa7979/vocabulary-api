@@ -1,4 +1,4 @@
-/** @import * as DBTypes from "../dummy-db/types" */
+/** @import * as DBTypes from "../db/dummy/types" */
 /** @import {TSelectionType} from "./getCurrentLessonsOfUser" */
 
 /** @typedef {Parameters<typeof getCurrentLessonsOfUser>[0]} IInputBag */

@@ -1,4 +1,4 @@
-/** @import * as DBTypes from "../dummy-db/types" */
+/** @import * as DBTypes from "../db/dummy/types" */
 
 const _isObject = input => input != null && typeof input === 'object';
 

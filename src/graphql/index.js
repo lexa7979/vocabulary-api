@@ -5,7 +5,7 @@ const { startStandaloneServer } = require('@apollo/server/standalone');
 
 const { allTypeDefs, allResolvers } = require('./entities');
 
-const DataService = require('../dummy-db');
+const DataService = require('../db/dummy');
 
 async function init() {
     const typeDefs = Object.values(allTypeDefs);
