@@ -5,9 +5,12 @@ const { startStandaloneServer } = require('@apollo/server/standalone');
 
 const { allTypeDefs, allResolvers } = require('./entities');
 
-const DataService = require('../db/dummy');
+// const DataService = require('../db/dummy');
+const DataService = require('../db/mongo');
 
 async function init() {
+    await DataService.init();
+
     const typeDefs = Object.values(allTypeDefs);
     const resolvers = Object.values(allResolvers);
 

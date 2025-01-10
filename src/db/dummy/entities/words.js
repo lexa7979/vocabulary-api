@@ -1,9 +1,11 @@
+/** @import * as Types from "../../types" */
+
 const { allWords, allTranslations } = require('./words.storage');
 
 /**
- * @param {import('../../types').UUID} wordId
+ * @param {Types.UUID} wordId
  * @throws
- * @returns {Promise<import('../../types').IWord>}
+ * @returns {Promise<Types.IWord>}
  */
 async function getWord(wordId) {
     const word = allWords.filter(item => item.id === wordId)[0];
@@ -14,9 +16,9 @@ async function getWord(wordId) {
 }
 
 /**
- * @param {import('../../types').UUID} wordId
+ * @param {Types.UUID} wordId
  * @throws
- * @returns {Promise<import('../../types').IWord>}
+ * @returns {Promise<Types.IWord>}
  */
 async function getWordWithTranslations(wordId) {
     const word = allWords.filter(item => item.id === wordId)[0];
@@ -30,7 +32,7 @@ async function getWordWithTranslations(wordId) {
 /**
  * @param {number} [first]
  * @param {number} [offset]
- * @returns {Promise<import('../../types').IWord[]>}
+ * @returns {Promise<Types.IWord[]>}
  */
 async function listAllWords(first = 0, offset = 0) {
     const results = allWords.slice(offset, first ? offset + first : undefined);
@@ -38,9 +40,9 @@ async function listAllWords(first = 0, offset = 0) {
 }
 
 /**
- * @param {import('../../types').UUID} translationId
+ * @param {Types.UUID} translationId
  * @throws
- * @returns {Promise<import('../../types').ITranslation>}
+ * @returns {Promise<Types.ITranslation>}
  */
 async function getTranslation(translationId) {
     const translation = allTranslations.filter(item => item.id === translationId)[0];
@@ -51,10 +53,10 @@ async function getTranslation(translationId) {
 }
 
 /**
- * @param {import('../../types').UUID} wordId
+ * @param {Types.UUID} wordId
  * @param {number} [first]
  * @param {number} [offset]
- * @returns {Promise<import('../../types').ITranslation[]>}
+ * @returns {Promise<Types.ITranslation[]>}
  */
 async function listAllTranslationsOfWord(wordId, first = 0, offset = 0) {
     const list = allTranslations.filter(item => item.wordId === wordId);

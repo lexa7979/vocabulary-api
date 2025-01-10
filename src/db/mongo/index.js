@@ -1,21 +1,25 @@
-/** @import * as Types from "../types" */
+/** @import {IDataService} from "../types" */
 
-/** @type {Types.IDataService} */
+const { init } = require('./lib/init');
+const ReadUsers = require('./read/users');
+const ReadWordClasses = require('./read/wordClasses');
+const ReadWords = require('./read/words');
+const WriteUsers = require('./write/users');
+const WriteWordClasses = require('./write/wordClasses');
+const WriteWords = require('./write/words');
+
+/** @type {IDataService} */
 const db = {
-    getWord: async () => null,
-    getWordWithTranslations: async () => null,
-    listAllWords: async () => null,
-    getTranslation: async () => null,
-    listAllTranslationsOfWord: async () => null,
-    getWordClass: async () => null,
-    getWordClassWithFlections: async () => null,
-    listAllWordClasses: async () => null,
-    getFlection: async () => null,
-    listAllFlectionsOfWordClass: async () => null,
-    getUser: async () => null,
-    listAllUsers: async () => null,
-    getActiveWord: async () => null,
-    listAllActiveWordsOfUser: async () => null,
+    init,
+
+    ...ReadWords,
+    ...WriteWords,
+
+    ...ReadWordClasses,
+    ...WriteWordClasses,
+
+    ...ReadUsers,
+    ...WriteUsers,
 };
 
 module.exports = db;

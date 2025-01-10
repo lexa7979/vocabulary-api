@@ -11,7 +11,11 @@
         "test:u": "jest -u",
         "test:w": "jest --watch --passWithNoTests",
         "test:wu": "jest --watch -u",
-        "test:coverage": "jest --coverage"
+        "test:coverage": "jest --coverage",
+        "//": "",
+        "mongodb:list-connections": "C:\\PROGRA~1\\mongosh\\mongosh -f mongosh-list-connections.js",
+        "///": "",
+        "danger:prefill-mongodb": "node ./prefill-mongodb.js I'm sure"
     },
     "keywords": [
         "vocabulary",

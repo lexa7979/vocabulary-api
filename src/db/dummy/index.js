@@ -1,42 +1,34 @@
-const {
-    getWord,
-    getWordWithTranslations,
-    listAllWords,
-    getTranslation,
-    listAllTranslationsOfWord,
-} = require('./entities/words');
+/* eslint-disable no-empty-function */
 
-const {
-    getWordClass,
-    getWordClassWithFlections,
-    listAllWordClasses,
-    getFlection,
-    listAllFlectionsOfWordClass,
-} = require('./entities/wordClasses');
+const ReadWords = require('./entities/words');
+const ReadWordClasses = require('./entities/wordClasses');
+const ReadUsers = require('./entities/users');
 
-const {
-    //
-    getUser,
-    listAllUsers,
-    getActiveWord,
-    listAllActiveWordsOfUser,
-} = require('./entities/users');
+/** @type {import('../types').IDataService} */
+const db = {
+    init: async () => {},
 
-module.exports = {
-    getWord,
-    getWordWithTranslations,
-    listAllWords,
-    getTranslation,
-    listAllTranslationsOfWord,
+    ...ReadWords,
+    insertWord: async () => {},
+    updateWord: async () => {},
+    insertWordWithTranslations: async () => {},
+    updateWordWithTranslations: async () => {},
+    insertTranslation: async () => {},
+    updateTranslation: async () => {},
 
-    getWordClass,
-    getWordClassWithFlections,
-    listAllWordClasses,
-    getFlection,
-    listAllFlectionsOfWordClass,
+    ...ReadWordClasses,
+    insertWordClass: async () => {},
+    updateWordClass: async () => {},
+    insertWordClassWithFlections: async () => {},
+    updateWordClassWithFlections: async () => {},
+    insertFlection: async () => {},
+    updateFlection: async () => {},
 
-    getUser,
-    listAllUsers,
-    getActiveWord,
-    listAllActiveWordsOfUser,
+    ...ReadUsers,
+    insertUser: async () => {},
+    updateUser: async () => {},
+    insertActiveWord: async () => {},
+    updateActiveWord: async () => {},
 };
+
+module.exports = db;
